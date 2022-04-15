@@ -13,6 +13,7 @@
 ## Services
 
 * [Architecture](services/architecture.md)
+* [UI](services/ui.md)
 * [Relayer](services/relayer.md)
 * [API](services/api.md)
 
