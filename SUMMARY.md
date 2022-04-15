@@ -9,7 +9,6 @@
 * [Authenticators](protocol/authenticators.md)
 * [Voting strategies](protocol/voting-strategies.md)
 * [Execution strategies](protocol/execution-strategies.md)
-* [Relayer](protocol/relayer.md)
 
 ## Services
 
