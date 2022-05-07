@@ -8,5 +8,5 @@ The [API](https://github.com/snapshot-labs/sx-api) indexes Snapshot X data. Spec
 
 #### Public APIs
 
-[https://sx-api-1.herokuapp.com](https://sx-api-1.herokuapp.com) (Görli)\
-[https://sx-api-2.herokuapp.com](https://sx-api-2.herokuapp.com) (Görli)
+[https://goerli-api-1.snapshotx.xyz](https://goerli-api-1.snapshotx.xyz) (Görli)\
+[https://goerli-api-2.snapshotx.xyz](https://goerli-api-2.snapshotx.xyz) (Görli)
