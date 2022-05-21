@@ -21,5 +21,5 @@
 ## Community
 
 * [Discord](http://discord.gg/snapshot)
-* [Telegram](https://telegram.snapshot.org)
+* [Telegram](https://telegram.snapshot.org/)
 * [GitHub](https://github.com/snapshot-labs)
