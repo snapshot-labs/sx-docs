@@ -10,7 +10,7 @@ Beyond this, each authenticator implements different logic depending on the type
 
 #### [Ethereum signature authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/authenticator/ethereum.cairo)&#x20;
 
-Will authenticate a user based on a message signed by Ethereum private keys.
+Will authenticate a user based on a message signed by Ethereum private keys. hello
 
 #### [StarkNet signature authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/authenticator/starknet.cairo)
 
