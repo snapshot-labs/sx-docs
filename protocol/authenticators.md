@@ -5,7 +5,7 @@ Authenticators are the contracts in charge of authenticating users to create pro
 
 The voter or proposer address resides at `calldata[0]` so in general the role of the authenticator is to check that the owner of the `calldata[0]` address authorized the transaction specified.
 
-#### [Ethereum signature authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSig.cairo)&#x20;
+### [Ethereum signature authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSig.cairo)&#x20;
 
 Will authenticate a user based on a message signed by an Ethereum private key. Users create an EIP712 signature for a transaction which is checked for validity here.  
 
@@ -23,7 +23,7 @@ func authenticate(
 ) -> ():
 ```
 
-#### [Ethereum transaction authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthTx.cairo)
+### [Ethereum transaction authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthTx.cairo)
 
 Will authenticate a user via getting them to submit a transaction on Ethereum and checking that the sender address is valid. Specifically, the user will call the `commit` method of the [StarkNet Commit](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/ethereum/L1Interact/StarkNetCommit.sol) L1 contract with a hash of their desired `target`, `function_selector`, and `calldata`. 
 
@@ -48,7 +48,7 @@ func authenticate(target : felt, function_selector : felt, calldata_len : felt, 
 The core use case for this authenticator is to allow smart contract accounts such as multi-sigs to use Snapshot X as they have no way to generate a signature and therefore cannot authenticate via signature verification.
 
 
-#### [StarkNet signature authenticator](https://github.com/snapshot-labs/sx-core/blob/session_key_auth/contracts/starknet/Authenticators/StarkSig.cairo)
+### [StarkNet signature authenticator](https://github.com/snapshot-labs/sx-core/blob/session_key_auth/contracts/starknet/Authenticators/StarkSig.cairo)
 
 Will authenticate a user based on a message signed by a StarkNet private key. EIP191 style signatures are used here. 
 
@@ -63,6 +63,15 @@ func authenticate(
     calldata_len : felt,
     calldata : felt*,
 ) -> ():
+```
+
+### [StarkNet Transaction authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/StarkTx.cairo)
+
+Will authenticate a user by checking the caller address. 
+
+```
+@external
+func authenticate(target : felt, function_selector : felt, calldata_len : felt, calldata : felt*) -> ():
 ```
 
 ### And More!
