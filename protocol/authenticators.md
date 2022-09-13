@@ -1,16 +1,32 @@
 # Authenticators
 
-Authenticators are the contracts in charge of authenticating users. All authenticators have a function titled `execute` that takes the following arguments:
+Authenticators are the contracts in charge of authenticating users to create proposals and cast votes. All proposal creation and vote transactions must be sent to the relevant space contract via an authenticator which performs logic to check that the user is eligible.
+
+All authenticators have an external method titled `authenticate` that should be called takes the following arguments:
 
 * `to`: The address of the space contract the user wants to interact with.
 * `function selector`: The function selector for the function inside the space contract that the user wants to invoke (vote or propose).
 * `calldata`: An array of parameters that are required by the function specified by `function selector`.
 
-Beyond this, each authenticator implements different logic depending on the type of authentication that is being done. This repository provides three useful authenticators:
+DAOs are free to write their own custom authenticators that suit their own needs however we provide a number of standard ones that should cover some popular usecases.
 
-#### [Ethereum signature authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/authenticator/ethereum.cairo)&#x20;
+#### [Ethereum signature authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSig.cairo)&#x20;
 
-Will authenticate a user based on a message signed by Ethereum private keys. hello
+Will authenticate a user based on a message signed by Ethereum private keys. 
+
+```
+@external
+func authenticate(
+    r : Uint256,
+    s : Uint256,
+    v : felt,
+    salt : Uint256,
+    target : felt,
+    function_selector : felt,
+    calldata_len : felt,
+    calldata : felt*,
+) -> ():
+```
 
 #### [StarkNet signature authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/authenticator/starknet.cairo)
 
