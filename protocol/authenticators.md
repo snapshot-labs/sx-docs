@@ -74,6 +74,55 @@ Will authenticate a user by checking the caller address.
 func authenticate(target : felt, function_selector : felt, calldata_len : felt, calldata : felt*) -> ():
 ```
 
+### Session Key Authentication
+
+Ethereum signature verification is quite expensive to perform due to the operations involved not being friendly to the underlying architecture of StarkNet. On the other hand, StarkKey signature verification is relatively cheap in comparison. We therefore intrdouce a method to allow users to authorize a StarkNet session key using their Ethereum key and then they can propose/vote using signatures from the StarkNet session key but the vote/proposal will be recorded as being made by the underlying Ethereum key's address.
+
+We provide two different Session key authenticators, with different methods to authorize the session key: Authorization from an Ethereum signature, and authorization from an Ethereum transaction. One authorized, the session key data that gets stored consists of the Ethereum address of the user, the session public key, and the duration of the session in seconds.
+
+```
+@external
+func authorize_session_key_from_sig(
+    r : Uint256,
+    s : Uint256,
+    v : felt,
+    salt : Uint256,
+    eth_address : felt,
+    session_public_key : felt,
+    session_duration : felt,
+):
+```
+
+Ethereum transaction authorization works in the similar way to the Ethereum transaction authenticator, where a hash of the session key data is bridged from Ethereum. 
+
+```
+@external
+func authorize_session_key_from_tx(eth_address : felt, session_public_key : felt, session_duration : felt):
+```
+
+Once the session key is authorized, the user can generate vote/propose signatures using their session private key and submit them to the `authenticate` method. 
+
+```
+@external
+func authenticate(
+    r : felt,
+    s : felt,
+    salt : felt,
+    target : felt,
+    function_selector : felt,
+    calldata_len : felt,
+    calldata : felt*,
+    session_public_key : felt,
+):
+```
+
+It is also possible for the user to revoke a session key at any time using the `revoke_session_key` method.
+
+```
+@external
+func revoke_session_key(sig_len : felt, sig : felt*, session_public_key : felt):
+```
+
 ### And More!
 
 Our modular approach here allows spaces to authenticate users using other authentication methods without any changes to the space contract. For example if you wanted to use Solana keys to authenticate users, you would simply need to write the authenticator contract on StarkNet, whitelist it in your space, and Solana users would be able to vote in your DAO.
