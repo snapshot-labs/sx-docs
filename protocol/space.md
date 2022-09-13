@@ -1,4 +1,4 @@
-# Space
+### Deploying a Space
 
 The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/space/space.cairo) is THE core contract: it's in charge of tracking proposals, votes, and other general settings. To deploy a new space, you will need to provide:
 
@@ -6,10 +6,14 @@ The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/star
 * `min_voting_duration`: The minimum duration of the voting period, it is impossible to finalize the proposal before this period is over, even if the quorum for a proposal is met.
 * `max_voting_duration`: The maximum duration of the voting period, it is impossible to cast a vote after this period has passed. Obviously, the `min_voting_duration` must be less than the `max_voting_duration`.
 * `proposal_threshold`: The minimum amount of voting power needed to be able to create a new proposal in the space.
+* `controller`: The address of the controller account for a space. This account will have permissions to update space settings and cancel a proposal. This clearly introduces a trust assumption, a way to remove this is to make the controller another space and therefore settings updates or proposal cancellations must be voted on by the community.  
+* `quorum`: The minimum total voting power required for a proposal to pass. Note this is the combined voting power of all votes, not just `FOR` votes. 
 * `voting_strategies`: An array of voting strategy contracts addresses that define the whitelisted voting strategies used by the space. The voting power of each user will be calculated as the sum of voting powers returned for each strategy in the list for that user. More information in the [Voting Strategy](https://github.com/snapshot-labs/sx-core#Voting-Strategies) section.
 * `voting_strategy_params_flat`: An array of parameters for the voting strategies specified in `voting_strategies`. This would be a 2D array but Cairo cannot curently handle that data type in calldata therefore we must pass a flattened version. 
 * `authenticators`: An array of whitelisted authenticators. These are the ways in which a user can authenticate themselves in order to vote or propose. For more information, refer to the [Authenticators](https://github.com/snapshot-labs/sx-core#Authenticators) section.
 * `executors`: An array of accepted execution strategies. These strategies will handle the execution of transactions inside proposals once voting is complete. More information about execution in the [Execution Contract](https://github.com/snapshot-labs/sx-core#Execution-Contract) section.
+
+Spaces should be deployed via a Space Factory contract using the `deploy_space` method. The factory tracks deployment events which get indexed by the SX-API. 
 
 ### Creating a Proposal 
 
@@ -24,7 +28,6 @@ The proposal creator will need to provide the following parameters:
 * `used_voting_strategies`: An array of voting strategies that should be iterated through to calculate the proposer's voting power. This must exceed `proposal_threshold` in order for the proposal to be created. The strategy addresses in this array must be whitelisted by the space however there is no requirement to pass all of the whitelisted strategies. This could be useful when a user knows that they only have voting power on a subset of the whitelisted strategies and therefore can save gas by only passing strategies that they know they have non zero voting power on.
 * `user_voting_strategy_params_flat`: The user parameters required by the voting strategies specified in `used_voting_strategies`. This would be a 2D array but Cairo cannot curently handle that data type in calldata therefore we must pass a flattened version. 
 
-
 ### Casting a Vote 
 
 Once a proposal has been created, and the `voting_delay` has elapsed, users can then vote for the proposal (once again, using an `authenticator` as a proxy).
@@ -37,7 +40,9 @@ Voters will need provide the following parameters:
 * `used_voting_strategies`: An array of voting strategies that should be iterated through to calculate the voter's voting power. The strategy addresses in this array must be whitelisted by the space however there is no requirement to pass all of the whitelisted strategies. This could be useful when a user knows that they only have voting power on a subset of the whitelisted strategies and therefore can save gas by only passing strategies that they know they have non zero voting power on.
 * `user_voting_strategy_params_flat`: The user parameters required by the voting strategies specified in `used_voting_strategies`. This would be a 2D array but Cairo cannot curently handle that data type in calldata therefore we must pass a flattened version. 
 
-Once the `min_voting_duration` has passed, votes are closed, and anyone can call `finalize_proposal` (this time directly on the space contract as no authentication is required): this will finalize the proposal, count the votes for/against/abstain, and call the `executor`.
+### Executing the Proposal
+
+Once the `min_voting_duration` has passed, the `finalize_proposal` can be called provided that the quorum forvotes are closed, and anyone can call `finalize_proposal` (this time directly on the space contract as no authentication is required): this will finalize the proposal, count the votes for/against/abstain, and call the `executor`.
 
 Note that each DAO will have at least one space, however a DAO might choose to have multiple spaces if they want to create different 'categories' of proposal each with different settings.
 
