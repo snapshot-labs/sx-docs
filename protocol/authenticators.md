@@ -74,11 +74,11 @@ Will authenticate a user by checking the caller address.
 func authenticate(target : felt, function_selector : felt, calldata_len : felt, calldata : felt*) -> ():
 ```
 
-### Session Key Authentication
+### Session Key Authenticators
 
-Ethereum signature verification is quite expensive to perform due to the operations involved not being friendly to the underlying architecture of StarkNet. On the other hand, StarkKey signature verification is relatively cheap in comparison. We therefore intrdouce a method to allow users to authorize a StarkNet session key using their Ethereum key and then they can propose/vote using signatures from the StarkNet session key but the vote/proposal will be recorded as being made by the underlying Ethereum key's address.
+Ethereum signature verification is quite expensive to perform due to the operations involved not being friendly to the underlying architecture of StarkNet. On the other hand, StarkKey signature verification is relatively cheap. We therefore introduce a method to allow users to authorize a StarkNet session key using their Ethereum key and then they can propose/vote using signatures from the StarkNet key but the vote/proposal will be recorded as being made by the underlying Ethereum key's address.
 
-We provide two different Session key authenticators, with different methods to authorize the session key: Authorization from an Ethereum signature, and authorization from an Ethereum transaction. One authorized, the session key data that gets stored consists of the Ethereum address of the user, the session public key, and the duration of the session in seconds.
+We provide two different Session key authenticators, with different methods to authorize the session key: Authorization from an [Ethereum signature](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSigSessionKey.cairo), and authorization from an [Ethereum transaction](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthTxSessionKey.cairo). One authorized, the session key data that gets stored consists of the Ethereum address of the user, the session public key, and the duration of the session in seconds. After the duration has elapsed, it will no longer be possible to vote/propose with the session key and and new one must be authorized. 
 
 ```
 @external
@@ -93,7 +93,7 @@ func authorize_session_key_from_sig(
 ):
 ```
 
-Ethereum transaction authorization works in the similar way to the Ethereum transaction authenticator, where a hash of the session key data is bridged from Ethereum. 
+Ethereum transaction authorization works in the similar way to the Ethereum transaction authenticator (see that section for more info), where a hash of the session key data is bridged from Ethereum. 
 
 ```
 @external
