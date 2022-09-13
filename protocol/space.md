@@ -13,7 +13,7 @@ The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/star
 * `authenticators`: An array of whitelisted authenticators. These are the ways in which a user can authenticate themselves in order to vote or propose. For more information, refer to the [Authenticators](https://github.com/snapshot-labs/sx-core#Authenticators) section.
 * `executors`: An array of accepted execution strategies. These strategies will handle the execution of transactions inside proposals once voting is complete. More information about execution in the [Execution Contract](https://github.com/snapshot-labs/sx-core#Execution-Contract) section.
 
-Spaces should be deployed via a Space Factory contract using the `deploy_space` method. The factory tracks deployment events which get indexed by the SX-API. 
+Spaces should be deployed via a Space Factory contract using the `deploy_space` method. The factory tracks deployment events which get indexed by the SX-API. Each DAO on Snapshot X will have at least one space, however a DAO might choose to have multiple spaces if they want to create different 'categories' of proposal each with different settings.
 
 ### Creating a Proposal 
 
@@ -42,12 +42,4 @@ Voters will need provide the following parameters:
 
 ### Executing the Proposal
 
-Once the `min_voting_duration` has passed, the `finalize_proposal` can be called provided that the quorum forvotes are closed, and anyone can call `finalize_proposal` (this time directly on the space contract as no authentication is required): this will finalize the proposal, count the votes for/against/abstain, and call the `executor`.
-
-Note that each DAO will have at least one space, however a DAO might choose to have multiple spaces if they want to create different 'categories' of proposal each with different settings.
-
-### Space factory
-
-Spaces are deployed via the space factory
-
-To enable an easy way to deploy and keep track of spaces, each DAO will have a space factory contract that will do this. The factory pattern has not yet been released on StarkNet therefore we are waiting to implement this feature.
+Once the `min_voting_duration` has passed, `finalize_proposal` can be called provided that the `quorum` for the space has been reached. The caller of `finalize_proposal` must pass the `proposal_id` along with the same `execution_params` as when the proposal was created. The `executor` contract will be called with the `execution_params` to execute the proposal. Note that there is no caller authentication required for `finalize_proposal`, transactions can be permissionlessly submitted directly to the space contract provided the conditions above are met. 
