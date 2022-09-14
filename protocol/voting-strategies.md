@@ -1,4 +1,4 @@
-# Voting strategies
+# Voting Strategies
 
 Voting strategies are the contracts used to determine the voting power (VP) of a user. Voting strategies can be created in a permissionless way however to use one, one must whitelist the strategy contract in the relevant space contract for the DAO. The most common example is using the ERC-20 token balance of a user to determine his voting power. But we could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol xyz... the possibilities are endless! 
 
