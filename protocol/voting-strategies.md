@@ -56,9 +56,7 @@ end
 
 Having a customizable VP for each user allows more fine grained control than enforcing a VP of 1 for everyone - which can still be achieved by just setting  the value to 1 for everyone. 
 
-### [Vanilla strategy](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/strategies/vanilla.cairo)
-
-Give 1 voting power to anyone, this strategy is used for testing only.
+This strategy can be used to build a gas efficient multi-sig, which is something the Snapshot team did during the 2022 StarkNet hackathon in Amsterdam! 
 
 ### And More!
 
