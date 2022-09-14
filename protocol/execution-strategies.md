@@ -15,10 +15,18 @@ We provide the following strategies inside the sx-core repo:
 
 The space contract builds on top of the OpenZeppelin account standard and is therefore an account contract itself. This means that it has the necessary logic to execute StarkNet transactions already. For this reason, the StarkNet execution strategy is built into the space contract itself and does not reside in a separate contract. This strategy will therefore not have an address like the others so we index it with the value `1`.
 
-One can execute an arbitrary number of transactions with this strategy, the `execution_params` array should encoded as set out [here].(https://github.com/snapshot-labs/sx.js/blob/master/src/utils/encoding/starknet-execution-params.ts) 
+One can execute an arbitrary number of transactions with this strategy, the `execution_params` array should encoded as set out [here](https://github.com/snapshot-labs/sx.js/blob/master/src/utils/encoding/starknet-execution-params.ts). 
+
+### [Ethereum Execution](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/ExecutionStrategies/ZodiacRelayer.cairo)
+
+This strategy enables Ethereum transactions to be executed following a proposal. It uses the StarkNet message bridge to communicate with the Ethereum destination address. The execution hash is a keccak hash of the transactions within the proposal. We use keccak here so that it can be efficiently computed on Ethereum in order to obtain the transactions that make up the pre-image.
+
+`execution_params` should be set up as follows:
+- `execution_params[0]`: Ethereum destination address
+- `execution_params[1]`: Proposal outcome
+- `execution_params[2]`: Low 128 bits of the execution hash
+- `execution_params[3]`: High 128 bits of the execution hash
+
+We provide a one Ethereum execution contract: A [Zodiac Module](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/ethereum/ZodiacModule/SnapshotXL1Executor.sol) that enables transactions to be executed from a Gnosis Safe. To use this module, DAOs will need deploy their own proxy and then enable it within their Safe. 
 
 
-
-Currently this repo provides the Zodiac Execution Strategy. This enables a DAO to perform permissionless execution of L1 Gnosis Safe transactions upon the successful completion of a proposal. The [Zodiac Relayer](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/execution/zodiac\_relayer.cairo%60) contract is the `executor` for this strategy, which will forward the execution to the [L1 Zodiac module](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/ethereum/SnapshotXZodiacModule/SnapshotXL1Executor.sol) address specified in `executions_params[0]`. To use this strategy, DAOs will need a Gnosis Safe with the Snapshot X Zodiac module activated.
-
-We will also be adding a StarkNet transaction execution strategy in the near future.
