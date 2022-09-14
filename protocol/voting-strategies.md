@@ -1,6 +1,27 @@
 # Voting strategies
 
-Voting strategies are the contracts used to determine the voting power of a user. Voting strategies can be created in a permissionless way however to use one, one must whitelist the strategy contract in the relevant space contract for the DAO. The most common example is using the ERC-20 token balance of a user to determine his voting power. But we could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol xyz... the possibilities are endless! \[2] We provide the strategies:
+Voting strategies are the contracts used to determine the voting power (VP) of a user. Voting strategies can be created in a permissionless way however to use one, one must whitelist the strategy contract in the relevant space contract for the DAO. The most common example is using the ERC-20 token balance of a user to determine his voting power. But we could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol xyz... the possibilities are endless! 
+
+All voting strategies must have a public view function called `get_voting_power` with the following interface:
+
+```
+func get_voting_power(
+    timestamp : felt,
+    voter_address : Address,
+    params_len : felt,
+    params : felt*,
+    user_params_len : felt,
+    user_params : felt*,
+) -> (voting_power : Uint256):
+end
+```
+The voting power returned by the function is a `Uint256`, we use this type so that there is greater compatibility with Ethereum rather than using the Starknet native felt type (251 bits). When a user creates a proposal or casts a vote, the array of whitelisted voting strategies will be iterated through and `get_voting_power` will be called on each. The VP of the user will be the aggregate of the voting power from each strategy. 
+
+The aggregate voting power for all users is also stored inside a `Uint256`, therefore when writing or selecting voting strategies, it is important to consider the likelihood of overflow. 
+
+
+
+\[2] We provide the strategies:
 
 #### [Single slot proof strategy](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/strategies/single\_slot\_proof.cairo)
 
