@@ -11,7 +11,7 @@ This function is called internally by the space contract when `finalize_proposal
 
 We provide the following strategies inside the sx-core repo:
 
-### [Ethereum Execution](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/ExecutionStrategies/ZodiacRelayer.cairo)
+## [Ethereum Execution](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/ExecutionStrategies/ZodiacRelayer.cairo)
 
 This strategy enables Ethereum transactions to be executed following a proposal. It uses the StarkNet message bridge to communicate with an Ethereum destination address. The execution hash is a keccak hash of the transactions within the proposal. We use keccak here so that it can be efficiently computed on Ethereum in order to obtain the transactions that make up the pre-image.
 
@@ -23,7 +23,7 @@ This strategy enables Ethereum transactions to be executed following a proposal.
 
 We provide an Ethereum execution contract: A [Zodiac Module](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/ethereum/ZodiacModule/SnapshotXL1Executor.sol) that enables transactions to be executed from a Gnosis Safe. To use this module, DAOs will need deploy their own proxy and then enable it within their Safe. 
 
-### [StarkNet Execution](https://github.com/snapshot-labs/sx-core/blob/6420b6ec2e3812822d670adf9857c4b231a1f052/contracts/starknet/lib/voting.cairo#L713)
+## [StarkNet Execution](https://github.com/snapshot-labs/sx-core/blob/6420b6ec2e3812822d670adf9857c4b231a1f052/contracts/starknet/lib/voting.cairo#L713)
 
 The space contract builds on top of the OpenZeppelin account standard and is therefore an account contract itself. This means that it has the necessary logic to execute StarkNet transactions already. For this reason, the StarkNet execution strategy is built into the space itself and does not reside in a separate contract. This strategy will therefore not have an address like the others so we index it with the value `1`.
 
