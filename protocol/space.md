@@ -41,6 +41,7 @@ Once a proposal has been created, and the `voting_delay` has elapsed, users can 
 Once the `min_voting_duration` has passed, `finalize_proposal` can be called provided that the `quorum` for the space has been reached. The caller of `finalize_proposal` must pass the `proposal_id` along with the same `execution_params` as when the proposal was created. The `executor` contract will be called with the `execution_params` to execute the proposal. Note that there is no caller authentication required for `finalize_proposal`, transactions can be permissionlessly submitted directly to the space contract provided the conditions above are met. 
 
 ```
+@external
 func finalize_proposal(proposal_id : felt, execution_params_len : felt, execution_params : felt*):
 ```
 
@@ -49,6 +50,7 @@ func finalize_proposal(proposal_id : felt, execution_params_len : felt, executio
 We provide a method for the `controller` account to cancel a proposal in case of an issue with it. The arguments passed are the same as for `finalize_proposal`. Certain execution strategies might have particular logic to execute in case of a proposal transaction, so the execution payload is still forwarded to the relevant `executor` contract.
 
 ```
+@external
 func cancel_proposal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr : felt}(
     proposal_id : felt, execution_params_len : felt, execution_params : felt*
 ):
