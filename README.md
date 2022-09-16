@@ -6,4 +6,6 @@ On the other hand, you have governance systems that run fully on-chain on Ethere
 
 Snapshot X aims to bridge this divide by providing a fully on-chain governance system that is 50 to 100x cheaper than current solutions that run on Ethereum mainnet. We hope that this will unlock massive increases in on-chain governance participation and flexibility of the governance mechanism without having to make any compromises on decentralisation. This is achieved by running the voting logic on StarkNet, which provides cheap computation whilst inheriting all of the security guarantees of Ethereum itself. Once voting on a proposal has ended, an StarkNet -> Ethereum message bridge can be utilised to allow transactions inside the proposal to be permissionless executed on Ethereum mainnet. 
 
-\
+ <p align="center">
+   <img src="/images/trilemma.png" width=100%>
+</p>
