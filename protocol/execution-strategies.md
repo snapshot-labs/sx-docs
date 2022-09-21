@@ -32,7 +32,7 @@ One can execute an arbitrary number of transactions with this strategy, the `exe
 
 ### And More! 
 
-Feel free to create your own execution strategies! The interface of a strategy can be found [here](https://github.com/snapshot-labs/sx-core/blob/goerli_testing/contracts/starknet/Interfaces/IExecutionStrategy.cairo)
+Feel free to create your own execution strategies! The interface of a strategy can be found [here](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Interfaces/IExecutionStrategy.cairo)
 
 
 
