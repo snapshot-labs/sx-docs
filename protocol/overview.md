@@ -14,6 +14,15 @@ With that analogy in mind, think about the **Space** contract like the character
 
 This modularity allows anyone to build with Snapshot X. Want to allow users from L1 to vote with tokens from L1? Or allow users from L2 to vote with tokens from L2? Or maybe you'd want to have a special logic where holders of a specific NFT get their voting power doubled? Anything is possible! You just need to select / write the correct **Authenticator** / **Voting Strategy** / **Execution Strategy**.
 
+## So what does the flow look like?
+
+Basically, the full flow looks like this:
+1) A DAO creates a Space contract and whitelists the authenticators / voting strategies / execution strategies it's going to need.
+2) A proposal gets created (anyone can create a new proposal as long as they have `proposer_threshold` amount of voting power (this parameter is define upon space creation and can be updated)). When created, the proposal must specify an `execution_strategy` contract along with the `execution parameters` that will get executed if quorum gets reached.
+3) Users can vote (by authenticating through one of the whitelisted `Authenticator`).
+4) Once the voting period has ended, anyone can call `finalize_proposal` (by interacting directly with the space contract, not with the authenticator). This will finalize the proposal, and will call the `execution strategy` defined by the proposal, forward the `execution parameters`, and specify the state of the proposal (`ACCEPTED / CANCELLED / REJECTED`).
+5) The execution strategy will receive the `execution parameters` and will execute some special logic based on those (and based on whether the proposal was accepted in the first place).
+
 Here is a diagram showcasing how the contracts that make up Snapshot X fit together along with various actions users can make to create proposals, vote, execute proposals, and update settings.
 
 {% embed url="https://whimsical.com/snapshot-x-core-5ryHXBELMwg9L9nA6rMeDs" %}
