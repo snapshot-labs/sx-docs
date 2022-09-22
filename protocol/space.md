@@ -1,3 +1,18 @@
+# What's the space contract?
+
+The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/space/space.cairo) is THE core contract: it's in charge of tracking proposals, votes, and other general settings. 
+
+We recommend you have a look at the [overview](https://docs.snapshotx.xyz/protocol/overview) page that gives a good explanation of what is the space contract and why it's so central.
+
+## The flow
+
+The flow consists of 4 different steps:
+1. Deploying the space (by using the `deploy_space` method on the Space Factory). Different parameters will be specified to initialize the Space, but they can all be modified later on.
+2. Creating a proposal (by going through one of the whitelisted *authenticator*). Some parameters will have to be specified here, such as the execution strategy that will be used, and the execution parameters. This space contract will check that the caller has at least `proposal_threshold` voting power, and if so, will create a new proposal.
+3. A voting period where users can cast their votes (against, by going through one of the whitelisted *authenticators*).
+4. Once the voting period has ended, anyone can call `finalize_proposal` (this time by interacting directly with the space contract). This will finalize the proposal and call the `execution_strategy` defined by the proposal, along with the proposal status (accepted / rejected). Alternatively, the proposal can be cancelled by the space `controler` (see `controller` parameter [here](#deploying-a-space).
+
+
 ## Deploying a Space
 
 The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/space/space.cairo) is THE core contract: it's in charge of tracking proposals, votes, and other general settings. To deploy a new space, you will need to provide:
