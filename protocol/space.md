@@ -7,10 +7,10 @@ We recommend you have a look at the [overview](https://docs.snapshotx.xyz/protoc
 ## The flow
 
 The flow consists of 4 different steps:
-1. Deploying the space (by using the `deploy_space` method on the Space Factory). Different parameters will be specified to initialize the Space, but they can all be modified later on.
-2. Creating a proposal (by going through one of the whitelisted *authenticator*). Some parameters will have to be specified here, such as the execution strategy that will be used, and the execution parameters. This space contract will check that the caller has at least `proposal_threshold` voting power, and if so, will create a new proposal.
-3. A voting period where users can cast their votes (against, by going through one of the whitelisted *authenticators*).
-4. Once the voting period has ended, anyone can call `finalize_proposal` (this time by interacting directly with the space contract). This will finalize the proposal and call the `execution_strategy` defined by the proposal, along with the proposal status (accepted / rejected). Alternatively, the proposal can be cancelled by the space `controler` (see `controller` parameter [here](#deploying-a-space).
+1. **Deploying the space** (by using the `deploy_space` method on the Space Factory). Different parameters will be specified to initialize the Space, but they can all be modified later on.
+2. **Creating a proposal** (by going through one of the whitelisted *authenticator*). Some parameters will have to be specified here, such as the execution strategy that will be used, and the execution parameters. This space contract will check that the caller has at least `proposal_threshold` voting power, and if so, will create a new proposal.
+3. A voting period where users can **cast their votes** (against, by going through one of the whitelisted *authenticators*).
+4. **Calling `finalize_proposal`** (this time by interacting directly with the space contract) once the voting period has ended. This will finalize the proposal and call the `execution_strategy` defined by the proposal, along with the proposal status (accepted / rejected). Alternatively, the proposal can be cancelled by the space `controler` (see `controller` parameter [here](#deploying-a-space).
 
 
 ## Deploying a Space
@@ -53,7 +53,7 @@ Once a proposal has been created, and the `voting_delay` has elapsed, users can 
 
 ## Executing the Proposal
 
-Once the `min_voting_duration` has passed, `finalize_proposal` can be called provided that the `quorum` for the space has been reached. The caller of `finalize_proposal` must pass the `proposal_id` along with the same `execution_params` as when the proposal was created. The `executor` contract will be called with the `execution_params` to execute the proposal. Note that there is no caller authentication required for `finalize_proposal`, transactions can be permissionlessly submitted directly to the space contract provided the conditions above are met. 
+Once the `min_voting_duration` has passed, `finalize_proposal` can be called provided that the `quorum` for the space has been reached (otherwise you need to wait until `max_voting_duration` has passed). The caller of `finalize_proposal` must pass the `proposal_id` along with the same `execution_params` as when the proposal was created. The `executor` contract will be called with the `execution_params` to execute the proposal. Note that there is no caller authentication required for `finalize_proposal`, transactions can be permissionlessly submitted directly to the space contract provided the conditions above are met. 
 
 ```
 @external
@@ -62,7 +62,7 @@ func finalize_proposal(proposal_id : felt, execution_params_len : felt, executio
 
 ## Cancelling the Proposal 
 
-We provide a method for the `controller` account to cancel a proposal in case of an issue with it. The arguments passed are the same as for `finalize_proposal`. Certain execution strategies might have particular logic to execute in case of a proposal transaction, so the execution payload is still forwarded to the relevant `executor` contract.
+We provide a method for the `controller` account to **cancel a proposal** in case of an issue with it. The arguments passed are the same as for `finalize_proposal`. Certain execution strategies might have particular logic to execute in case of a proposal transaction, so the execution payload is still forwarded to the relevant `executor` contract.
 
 ```
 @external

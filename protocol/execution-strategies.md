@@ -1,6 +1,6 @@
 # Execution Strategies
 
-Execution strategies (also interchangably called executors) are contracts that perform the logic that should be executed once the voting on a proposal is completed. Spaces can whitelist an array of execution strategies and then each proposal creator should select one from the array when creating a proposal. All execution strategies should have an external `execute` function with the following interface: 
+Execution strategies (also interchangably called executors) are contracts that **perform the logic that should be executed once the voting on a proposal is completed**. Spaces can whitelist an array of execution strategies and then each proposal creator should select one from the array when creating a proposal. All execution strategies should have an external `execute` function with the following interface: 
 
 ```
 @external
