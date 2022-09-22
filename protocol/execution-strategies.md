@@ -8,7 +8,8 @@ func execute(proposal_outcome : felt, execution_params_len : felt, execution_par
 end
 ```
 
-This function is called internally by the space contract when `finalize_proposal` is called. Once the strategy receives the `proposal_outcome` (Accepted, Rejected, Cancelled), along with the `execution_params`, it can perform arbitrary logic on the data and execute transactions. For example, it could check `proposal_outcome` to see whether the proposal had passed and if so execute one set of transactions, otherwise executing another set. 
+This function is called internally by the space contract when `finalize_proposal` is called.
+Once the strategy receives the `proposal_outcome` (Accepted, Rejected, Cancelled), along with the `execution_params`, it can perform arbitrary logic on the data and execute transactions. For example, it could check `proposal_outcome` to see whether the proposal had passed and if so execute one set of transactions, otherwise executing another set. 
 
 We provide the following strategies inside the sx-core repo:
 
