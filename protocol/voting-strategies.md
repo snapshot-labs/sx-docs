@@ -1,6 +1,9 @@
 # Voting Strategies
 
-Voting strategies are the contracts used to determine the voting power (VP) of a user. Voting strategies can be created in a permissionless way however to use one, one must whitelist the strategy contract in the relevant space contract for the DAO. The most common example is using the ERC-20 token balance of a user to determine his voting power. But we could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol xyz... the possibilities are endless! 
+Voting strategies are the contracts used to determine the voting power (VP) of a user.
+Voting strategies can be created in a permissionless way however to use one, one must whitelist the strategy contract in the relevant space contract for the DAO.
+
+The most common example is using the ERC-20 token balance of a user to determine his voting power. But we could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol xyz... the possibilities are endless! 
 
 All voting strategies must have a public view function called `get_voting_power` which gets called internally within the `propose` and `vote` functions. It has the following interface:
 
@@ -15,9 +18,15 @@ func get_voting_power(
 ) -> (voting_power : Uint256):
 end
 ```
-`timestamp` is the snapshot at which voting power is calculated for all users. We use a timestamp rather than a block number to better enable multi-chain applications since a timestamp is universal to all chains. There are two sets of parameters for each voting strategy, `params` and `user_params`. `params` are set in the space contract and are the same for every user who calls that strategy in the space, they act as configuration parameters for a strategy. Examples here are token contract address that will be queried, or a constant scaling factor that should be applied to the VP returned for every user. `user_params` are submitted by users when they create a proposal or cast a vote, and can therefore be different for each user. Examples here are an Ethereum storage proof. There is no requirement to use either of these parameter arrays in your strategy, in which case you can just pass an empty array. 
+`timestamp` is the snapshot at which voting power is calculated for all users. We use a timestamp rather than a block number to better enable multi-chain applications since a timestamp is universal to all chains.
 
-The voting power returned by the function is a `Uint256`, we use this type so that there is greater compatibility with Ethereum rather than using the Starknet native felt type (251 bits). When a user creates a proposal or casts a vote, the array of whitelisted voting strategies will be iterated through and `get_voting_power` will be called on each. The VP of the user will be the aggregate of the voting power from each strategy. The aggregate voting power for all users is also stored inside a `Uint256`, therefore when writing or selecting voting strategies, it is important to consider the likelihood of overflow. 
+There are two sets of parameters for each voting strategy, `params` and `user_params`.
+- `params` are set in the space contract and are the same for every user who calls that strategy in the space, they act as configuration parameters for a strategy. Examples here are token contract address that will be queried, or a constant scaling factor that should be applied to the VP returned for every user.
+- `user_params` are submitted by users when they create a proposal or cast a vote, and can therefore be different for each user. Examples here are an Ethereum storage proof. There is no requirement to use either of these parameter arrays in your strategy, in which case you can just pass an empty array. 
+
+The voting power returned by the function is a `Uint256`, we use this type so that there is greater compatibility with Ethereum rather than using the Starknet native felt type (251 bits).
+
+When a user creates a proposal or casts a vote, the array of whitelisted voting strategies will be iterated through and `get_voting_power` will be called on each. The VP of the user will be the aggregate of the voting power from each strategy. The aggregate voting power for all users is also stored inside a `Uint256`, therefore when writing or selecting voting strategies, it is important to consider the likelihood of overflow. 
 
 We provide the following strategies inside the sx-core repo:
 
@@ -25,7 +34,8 @@ We provide the following strategies inside the sx-core repo:
 
 A strategy that allows balances of Ethereum ERC20 and ERC721 balances to be used as VP. 
 
-The backend of the strategy is the Fossil module built by the awesome Oiler team. This module allows any part of the Ethereum mainnet state to be trustlessly verified on StarkNet. Verification of Ethereum state information is achieved by submitting a proof of the state to StarkNet and then verifying that proof. Once this state information has been proven, we can then calculate VP as an arbitrary function of the information. For more information on Fossil, refer to their [Github](https://github.com/OilerNetwork/fossil)
+The backend of the strategy is the [Fossil](https://github.com/OilerNetwork/fossil) module built by the awesome Oiler team. This module allows any part of the Ethereum mainnet state to be trustlessly verified on StarkNet.
+Verification of Ethereum state information is achieved by submitting a proof of the state to StarkNet and then verifying that proof. Once this state information has been proven, we can then calculate VP as an arbitrary function of the information. For more information on Fossil, refer to their [Github](https://github.com/OilerNetwork/fossil)
 
 `params` should be configured as follows: 
 - `params[0]`: The address of the Ethereum token contract
