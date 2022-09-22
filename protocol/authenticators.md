@@ -1,6 +1,10 @@
 # Authenticators
 
-Authenticators are the contracts in charge of authenticating users to create proposals and cast votes. All proposal creation and vote transactions must be sent to the relevant DAO's space contract via an authenticator using the external `authenticate` method which exists in every authenticator. DAOs are free to write their own custom authenticators that suit their own needs however we provide a number of standard ones that should cover some popular usecases and can be extended if needed. The voter or proposer address resides at `calldata[0]` so in general the role of the authenticator is to check that the owner of the `calldata[0]` address authorized the transaction specified.
+Authenticators are the contracts in charge of authenticating users to create proposals and cast votes.
+All proposal creation and vote transactions must be sent to the relevant DAO's space contract via an authenticator using the external `authenticate` method which exists in every authenticator.
+
+DAOs are free to write their own custom authenticators that suit their own needs however we provide a number of standard ones that should cover some popular usecases and can be extended if needed.
+The voter or proposer address resides at `calldata[0]` so in general the role of the authenticator is to check that the owner of the `calldata[0]` address authorized the transaction specified.
 
 ### [Ethereum Signature Authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSig.cairo)&#x20;
 
