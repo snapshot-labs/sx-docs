@@ -1,13 +1,24 @@
-# Home
+# Snapshot X
 
-Governance mechanisms obey a trilemma between **decentralisation**, **cost**, and **flexibility**. On the one hand, you have systems like [Snapshot](https://snapshot.org/#/) that provide a virtually\* free experience with lots of flexibility. However it relies on one trusting the Snapshot off-chain protocol to deliver the verdict of a particular governance proposal and to not censor votes. Flexibility comes from the wide range of voting strategies than one can employ to calculate the voting power for each user. Another notable limitation of Snapshot is the lack of trustless on-chain execution if a proposal includes transactions. Oracles such as [Reality.eth](https://reality.eth.link/) or [UMA](https://umaproject.org/products/optimistic-oracle) can be used to bring data on-chain, these systems are very efficient and are a great option in many scenarios however they introduce trust assumptions which make them unsuitable for certain usecases. 
+Welcome to Snapshot X's documentation! If you're looking to know more about Snapshot X, or looking for specific technical details about Snapshot X, you've come to the right place!
 
-On the other hand, you have governance systems that run fully on-chain on Ethereum mainnet. [Compound Governor](https://github.com/compound-finance/compound-protocol/blob/master/contracts/Governance/GovernorBravoDelegate.sol) is one example of such a system. All the voting logic is computed on-chain which provides an equivalent level of decentralization and security to Ethereum itself. Additionally, on-chain execution is very straightforward and trustless as the proposal results are already on-chain. The compromise of such a system is a high cost of participation due to the high gas costs incurred when transacting on the blockchain. The flexibility of the system is also limited by cost as sophisticated voting strategies require increased on-chain logic and therefore it would cost even more and limit participation further to utilise them.
+# What's Snapshot X?
 
-Snapshot X aims to bridge this divide by providing a fully on-chain governance system that is up to 100x cheaper than current solutions that run on Ethereum mainnet. We hope that this will unlock massive increases in on-chain governance participation and flexibility of the governance mechanism without having to make any compromises on decentralisation. This is achieved by running the voting logic on StarkNet, which provides cheap computation whilst inheriting all of the security guarantees of Ethereum itself. Once voting on a proposal has ended, an StarkNet -> Ethereum message bridge can be utilised to allow transactions inside the proposal to be permissionless executed on Ethereum mainnet. 
+**Snapshot X** is a voting tool for DAOs. Simple as that! Technically speaking, it's a set of highly modular smart-contracts that interact with each other to do all the book-keeping, but the end result is the same: it's a **voting tool**!
 
- <p align="center">
-   <img src="/images/trilemma.png" width=100%>
-</p>
+The difference between Snapshot X and [Snapshot](https://snapshot.org) is that Snapshot X is **fully on-chain**. What this means is:
 
-\* There are some small costs to run the various off-chain services that make up Snapshot. However these are sufficiently low such that they can be fully subsizied by Snapshot Labs, providing a free end user experience.
+- **Votes are permissionless**: No one can censor your vote!
+- **Votes are fair**: If you vote `Yes` on a proposal, your vote **will** be counted. You don't need to trust SnapshotLabs or any group of humans; you can be sure your vote will be correctly accounted for.
+- **Execution is trustless**: Say you create a new proposal which, if it passes, will transfer 1ETH to `snapshot.eth`. If the proposal passes, the 1ETH will automatically get sent to `snapshot.eth`, without any further human help needed.
+
+These are important properties for a voting system, as a voting system is meaningless if it can be rigged, or if it can censor votes!
+
+# What's in this book?
+
+-> Protocol : A dive in the Snapshot X protocol and its technical details.
+-> Services : The different tools and services that are required to support Snapshot X.
+
+# Getting started
+
+If you want to get started, I suggest you start by reading the [protocol overview](https://example.com) to get a better understanding of the inner workings of Snapshot X! :)

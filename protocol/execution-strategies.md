@@ -1,6 +1,6 @@
 # Execution strategies
 
-Execution strategies (also interchangeably called executors) are contracts that perform the logic that should be executed once the voting on a proposal is completed. Spaces can whitelist an array of execution strategies and then each proposal creator should select one from the array when creating a proposal. All execution strategies should have an external `execute` function with the following interface:
+Execution strategies (also interchangeably called executors) are contracts that **perform the logic that should be executed once the voting on a proposal is completed**. Spaces can whitelist an array of execution strategies and then each proposal creator should select one from the array when creating a proposal. All execution strategies should have an external `execute` function with the following interface: 
 
 ```
 @external
@@ -8,7 +8,8 @@ func execute(proposal_outcome : felt, execution_params_len : felt, execution_par
 end
 ```
 
-This function is called internally by the space contract when `finalize_proposal` is called. Once the strategy receives the `proposal_outcome` (Accepted, Rejected, Cancelled), along with the `execution_params`, it can perform arbitrary logic on the data and execute transactions. For example, it could check `proposal_outcome` to see whether the proposal had passed and if so execute one set of transactions, otherwise executing another set.
+This function is called internally by the space contract when `finalize_proposal` is called.
+Once the strategy receives the `proposal_outcome` (Accepted, Rejected, Cancelled), along with the `execution_params`, it can perform arbitrary logic on the data and execute transactions. For example, it could check `proposal_outcome` to see whether the proposal had passed and if so execute one set of transactions, otherwise executing another set. 
 
 We provide the following strategies inside the sx-core repo:
 
@@ -33,4 +34,4 @@ One can execute an arbitrary number of transactions with this strategy, the `exe
 
 ### And more!
 
-Feel free to create your own execution strategies! The interface of a strategy can be found [here](https://github.com/snapshot-labs/sx-core/blob/goerli\_testing/contracts/starknet/Interfaces/IExecutionStrategy.cairo)
+Feel free to create your own execution strategies! The interface of a strategy can be found [here](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Interfaces/IExecutionStrategy.cairo)
