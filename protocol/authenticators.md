@@ -6,9 +6,9 @@ Authenticators are the contracts in charge of **authenticating users** to create
 DAOs are free to write their own custom authenticators that suit their own needs however we provide a number of standard ones that should cover some popular usecases and can be extended if needed.
 The voter or proposer address resides at `calldata[0]` so in general the role of the authenticator is to check that the owner of the `calldata[0]` address authorized the transaction specified.
 
-### [Ethereum Signature Authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSig.cairo)&#x20;
+### [Ethereum signature authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSig.cairo)
 
-Will authenticate a user based on a message signed by an Ethereum private key. Users create an EIP712 signature for a transaction which is checked for validity here.  
+Will authenticate a user based on a message signed by an Ethereum private key. Users create an EIP712 signature for a transaction which is checked for validity here.
 
 ```
 @external
@@ -24,15 +24,16 @@ func authenticate(
 ) -> ():
 ```
 
-### [Ethereum Transaction Authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthTx.cairo)
+### [Ethereum transaction authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthTx.cairo)
 
-Will authenticate a user via getting them to submit a transaction on Ethereum and checking that the sender address is valid. Specifically, the user will call the `commit` method of the [StarkNet Commit](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/ethereum/L1Interact/StarkNetCommit.sol) L1 contract with a hash of their desired `target`, `function_selector`, and `calldata`. 
+Will authenticate a user via getting them to submit a transaction on Ethereum and checking that the sender address is valid. Specifically, the user will call the `commit` method of the [StarkNet Commit](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/ethereum/L1Interact/StarkNetCommit.sol) L1 contract with a hash of their desired `target`, `function_selector`, and `calldata`.
 
 ```
 function commit(uint256 _hash) external;
 ```
 
-This hash along with the user's Ethereum address will then be **sent to the the L1 message handler** method of authenticator by the StarkNet message bridge, which will store the data in state. 
+
+This hash along with the user's Ethereum address will then be **sent to the L1 message handler** method of authenticator by the StarkNet message bridge, which will store the data in state.
 
 ```
 @l1_handler
@@ -48,10 +49,9 @@ func authenticate(target : felt, function_selector : felt, calldata_len : felt, 
 
 The core use case for this authenticator is to allow **smart contract accounts such as multi-sigs to use Snapshot X** as they have no way to generate a signature and therefore cannot authenticate via signature verification.
 
+### [StarkNet signature authenticator](https://github.com/snapshot-labs/sx-core/blob/session\_key\_auth/contracts/starknet/Authenticators/StarkSig.cairo)
 
-### [StarkNet Signature Authenticator](https://github.com/snapshot-labs/sx-core/blob/session_key_auth/contracts/starknet/Authenticators/StarkSig.cairo)
-
-Will authenticate a user based on a message signed by a StarkNet private key. EIP191 style signatures are used here. 
+Will authenticate a user based on a message signed by a StarkNet private key. EIP191 style signatures are used here.
 
 ```
 @external
@@ -68,18 +68,18 @@ func authenticate(
 
 ### [StarkNet Transaction authenticator](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/StarkTx.cairo)
 
-Will authenticate a user by checking the caller address. 
+Will authenticate a user by checking the caller address.
 
 ```
 @external
 func authenticate(target : felt, function_selector : felt, calldata_len : felt, calldata : felt*) -> ():
 ```
 
-### Session Key Authenticators
+### Session key authenticators
 
 **Ethereum signature verification is quite expensive** to perform due to the operations involved not being friendly to the underlying architecture of StarkNet. On the other hand, **StarkKey signature verification is relatively cheap**. We therefore introduce a method to allow users to authorize a StarkNet session key using their Ethereum key and then they can propose/vote using signatures from the StarkNet key but the vote/proposal will be **recorded as being made by the underlying Ethereum key's address**.
 
-We provide two different Session key authenticators, with different methods to authorize the session key: Authorization from an [Ethereum Signature](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSigSessionKey.cairo), and authorization from an [Ethereum Transaction](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthTxSessionKey.cairo). One authorized, the session key data that gets stored consists of the Ethereum address of the user, the session public key, and the duration of the session in seconds. After the duration has elapsed, it will no longer be possible to vote/propose with the session key and and new one must be authorized. 
+We provide two different Session key authenticators, with different methods to authorize the session key: Authorization from an [Ethereum Signature](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthSigSessionKey.cairo), and authorization from an [Ethereum Transaction](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/Authenticators/EthTxSessionKey.cairo). One authorized, the session key data that gets stored consists of the Ethereum address of the user, the session public key, and the duration of the session in seconds. After the duration has elapsed, it will no longer be possible to vote/propose with the session key and and new one must be authorized.
 
 ```
 @external
@@ -94,14 +94,14 @@ func authorize_session_key_from_sig(
 ):
 ```
 
-Ethereum transaction authorization works in the similar way to the Ethereum transaction authenticator (see that section for more info), where a hash of the session key data is bridged from Ethereum. 
+Ethereum transaction authorization works in the similar way to the Ethereum transaction authenticator (see that section for more info), where a hash of the session key data is bridged from Ethereum.
 
 ```
 @external
 func authorize_session_key_from_tx(eth_address : felt, session_public_key : felt, session_duration : felt):
 ```
 
-Once the session key is authorized, the user can generate vote/propose signatures using their session private key and submit them to the `authenticate` method. 
+Once the session key is authorized, the user can generate vote/propose signatures using their session private key and submit them to the `authenticate` method.
 
 ```
 @external
@@ -124,6 +124,6 @@ It is also possible for the user to revoke a session key before the scheduled en
 func revoke_session_key(sig_len : felt, sig : felt*, session_public_key : felt):
 ```
 
-### And More!
+### And more!
 
 Our modular approach here allows spaces to **authenticate users using other authentication methods without any changes to the space contract**. For example if you wanted to use Solana keys to authenticate users, you would simply need to write the authenticator contract on StarkNet, whitelist it in your space, and Solana users would be able to vote in your DAO.
