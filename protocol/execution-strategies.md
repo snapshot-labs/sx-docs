@@ -1,6 +1,6 @@
 # Execution strategies
 
-Execution strategies (also interchangeably called executors) are contracts that **perform the logic that should be executed once the voting on a proposal is completed**. Spaces can whitelist an array of execution strategies and then each proposal creator should select one from the array when creating a proposal. All execution strategies should have an external `execute` function with the following interface: 
+Execution strategies are contracts that **perform the logic that should be executed once the voting on a proposal is completed**. Spaces can whitelist an array of execution strategies and then each proposal creator should select one from the array when creating a proposal. All execution strategies should have an external `execute` function with the following interface: 
 
 ```
 @external
@@ -8,12 +8,12 @@ func execute(proposal_outcome : felt, execution_params_len : felt, execution_par
 end
 ```
 
-This function is called internally by the space contract when `finalize_proposal` is called.
+This function is called internally by the space contract when `finalizeProposal` is called.
 Once the strategy receives the `proposal_outcome` (Accepted, Rejected, Cancelled), along with the `execution_params`, it can perform arbitrary logic on the data and execute transactions. For example, it could check `proposal_outcome` to see whether the proposal had passed and if so execute one set of transactions, otherwise executing another set. 
 
 We provide the following strategies inside the sx-core repo:
 
-### [Ethereum execution](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/ExecutionStrategies/ZodiacRelayer.cairo)
+### [Ethereum execution](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/ExecutionStrategies/EthRelayer.cairo)
 
 This strategy enables Ethereum transactions to be executed following a proposal. It uses the StarkNet message bridge to communicate with an Ethereum destination address. The execution hash is a keccak hash of the transactions within the proposal. We use keccak here so that it can be efficiently computed on Ethereum in order to obtain the transactions that make up the pre-image.
 
