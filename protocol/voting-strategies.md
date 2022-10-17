@@ -1,14 +1,14 @@
 # Voting strategies
 
-Voting strategies are the contracts used to **determine the voting power (VP) users**.
-Voting strategies can be created in a **permissionless** way however to use one, one must whitelist the strategy contract in the relevant space contract for the DAO.
+Voting strategies are the contracts used to **determine the voting power (VP) of users**.
+Voting strategies can be created in a **permissionless** way, however to use one, one must whitelist the strategy contract in the relevant space contract for the DAO.
 
-The most common example is using the ERC-20 token balance of a user to determine his voting power. But we could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol xyz... the possibilities are endless! 
+The most common example is using the ERC-20 token balance of a user to determine his voting power. But we could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol xyz... the possibilities are endless! We are fans [Turing Complete Governance](https://baby.mirror.xyz/O7a922A-9zT4C4UwssRExkftdHywJ-13sR2rxQ-t__k) which is the concept of a governance system with arbitrary programmability. This will allow complex and expressive mechansims of coordination to be seemlessly integrated into governance decisions. Snapshot X reaches this standard, so we are excited to see what people build! 
 
-**All voting strategies must have a public view function called `get_voting_power`** which gets called internally within the `propose` and `vote` functions. It has the following interface:
+**All voting strategies must have a public view function called `getVotingPower`** which gets called internally within the `propose` and `vote` functions. It has the following interface:
 
 ```
-func get_voting_power(
+func getVotingPower(
     timestamp : felt,
     voter_address : Address,
     params_len : felt,
