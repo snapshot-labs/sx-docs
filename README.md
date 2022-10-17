@@ -19,4 +19,4 @@ Welcome to Snapshot X's documentation. If you're looking for specific technical 
 
 If anything in these docs is unclear or you would like more detail, do not hesitate to reach out on [Discord](https://discord.gg/snapshot).
 
-\[1] We note that there are in fact offchain services (Mana, UI) built for use with Snapshot X, but these are not mandatory and therefore cannot lead to censorship.
+\[1] We note that there are in fact offchain services (eg the relayer Mana) built for use with Snapshot X, but these are not mandatory and therefore cannot lead to censorship.
