@@ -83,7 +83,7 @@ We provide two different Session key authenticators, with different methods to a
 
 ```
 @external
-func authorize_session_key_from_sig(
+func authorizeSessionKeyFromSig(
     r : Uint256,
     s : Uint256,
     v : felt,
@@ -98,7 +98,7 @@ Ethereum transaction authorization works in the similar way to the Ethereum tran
 
 ```
 @external
-func authorize_session_key_from_tx(eth_address : felt, session_public_key : felt, session_duration : felt):
+func authorizeSessionKeyFromTx(eth_address : felt, session_public_key : felt, session_duration : felt):
 ```
 
 Once the session key is authorized, the user can generate vote/propose signatures using their session private key and submit them to the `authenticate` method.
@@ -117,12 +117,19 @@ func authenticate(
 ):
 ```
 
-It is also possible for the user to revoke a session key before the scheduled ending time using the `revoke_session_key` method.
+It is also possible for the user to revoke a session key before the scheduled ending time using either a signature from the session key itself or from the owner Ethereum key using either a signature or a transaction (depending on the authenticator type).
 
 ```
 @external
-func revoke_session_key(sig_len : felt, sig : felt*, session_public_key : felt):
+func revokeSessionKeyWithSessionKeySig(r: felt, s: felt, salt: felt, session_public_key: felt):
+
+@external
+func revokeSessionKeyWithOwnerSig(r: Uint256, s: Uint256, v: felt, salt: Uint256, session_public_key: felt):
+
+@external
+func revokeSessionKeyWithOwnerTx(session_public_key: felt):
 ```
+
 
 ### And more!
 
