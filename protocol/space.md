@@ -1,22 +1,20 @@
 # Space
-## What's the space contract?
 
-The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/space/space.cairo) is THE core contract: it's in charge of tracking proposals, votes, and other general settings. 
-
-We recommend you have a look at the [overview](https://docs.snapshotx.xyz/protocol/overview) page that gives a good explanation of what is the space contract and why it's so central.
+The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/space/space.cairo) is THE core contract: it's in charge of tracking proposals, votes, and other general settings. In this section we will go into detail on how to deploy a space, create a proposal in it, vote on the proposal, and finally execute it. We decided to make Space contracts an extension of an OpenZeppelin account contract so that it would then already contain logic to execute transactions. It also makes Snapshot X more compatible with the StarkNet ecoystem where account contracts play a very large part.  
 
 ## The flow
 
 The flow consists of 4 different steps:
-1. **Deploying the space** (by using the `deploy_space` method on the Space Factory). Different parameters will be specified to initialize the Space, but they can all be modified later on.
-2. **Creating a proposal** (by going through one of the whitelisted *authenticator*). Some parameters will have to be specified here, such as the execution strategy that will be used, and the execution parameters. This space contract will check that the caller has at least `proposal_threshold` voting power, and if so, will create a new proposal.
+1. **Deploying the space** (by using the `deploySpace` method on the Space Factory). Different parameters will be specified to initialize the Space, but they can all be modified later on.
+2. **Creating a proposal** (by going through one of the whitelisted *authenticator* contracts). Some parameters will have to be specified here, such as the execution strategy that will be used, and the execution parameters. This space contract will check that the caller has at least `proposal_threshold` voting power, and if so, will create a new proposal.
 3. A voting period where users can **cast their votes** (against, by going through one of the whitelisted *authenticators*).
 4. **Calling `finalize_proposal`** (this time by interacting directly with the space contract) once the voting period has ended. This will finalize the proposal and call the `execution_strategy` defined by the proposal, along with the proposal status (accepted / rejected). Alternatively, the proposal can be cancelled by the space `controler` (see `controller` parameter [here](#deploying-a-space).
 
-### Deploy a space
+### Deploying a space
 
-The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/space/space.cairo) is THE core contract: it's in charge of tracking proposals, votes, and other general settings. To deploy a new space, you will need to provide:
+Spaces should be deployed via a Space Factory contract using the `deploySpace` method. The factory tracks deployment events which get indexed by the SX-API. Each DAO on Snapshot X will have at least one space, however a DAO might choose to have multiple spaces if they want to create different 'categories' of proposal each with different settings. To deploy a new space, you will need to provide:
 
+* `public_key`: The public key that controls the Space contract, which is a requirement for account contract compatibility. In most cases the functionality will be unwanted and can be set to zero. Which effectively means that there is no key pair that can control the account. 
 * `voting_delay`: The delay between when a proposal is created, and when the voting starts. A value of 0 means that as soon as the proposal is created anyone can vote whilst a value of 3600 means that voting will start 3600 seconds after the proposal is created.
 * `min_voting_duration`: The minimum duration of the voting period, it is impossible to finalize the proposal before this period is over, even if the quorum for thw proposal is met.
 * `max_voting_duration`: The maximum duration of the voting period, it is impossible to cast a vote after this period has passed. Obviously, the `min_voting_duration` must be less than the `max_voting_duration`.
@@ -26,11 +24,10 @@ The [space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/star
 * `voting_strategies`: An array of voting strategy contracts addresses that define the whitelisted voting strategies used by the space. The voting power of each user will be calculated as the sum of voting powers returned for each strategy in the list for that user. More information in the [Voting Strategy](https://github.com/snapshot-labs/sx-core#Voting-Strategies) section.
 * `voting_strategy_params_flat`: An array of parameters for the voting strategies specified in `voting_strategies`. This would be a 2D array but Cairo cannot curently handle that data type in calldata therefore we must pass a flattened version.
 * `authenticators`: An array of whitelisted authenticators. These are the ways in which a user can authenticate themselves in order to vote or propose. For more information, refer to the [Authenticators](https://github.com/snapshot-labs/sx-core#Authenticators) section.
-* `executors`: An array of accepted execution strategies. These strategies will handle the execution of transactions inside proposals once voting is complete. More information about execution in the [Execution Contract](https://github.com/snapshot-labs/sx-core#Execution-Contract) section.
+* `execution_strategies`: An array of accepted execution strategies. These strategies will handle the execution of transactions inside proposals once voting is complete. More information about execution in the [Execution Contract](https://github.com/snapshot-labs/sx-core#Execution-Contract) section.
+* `metadata_uri`: The metadata URI for the space.
 
-Spaces should be deployed via a Space Factory contract using the `deploy_space` method. The factory tracks deployment events which get indexed by the SX-API. Each DAO on Snapshot X will have at least one space, however a DAO might choose to have multiple spaces if they want to create different 'categories' of proposal each with different settings.
-
-### Create a proposal
+### Creating a proposal
 
 Once a space has been created, users can create new proposals by calling the `propose` method (provided the caller has at least `proposal_threshold` voting power). Users don't directly interact with the `space` contract, but instead via one of the whitelisted `authenticator` contracts which act as proxies. Since the proposal is created via an authenticator, the exact external interface for creating a proposal will depend on the interface of the chosen authenticator. The parameters passed from the authenticator to the space contract will be the following:
 
