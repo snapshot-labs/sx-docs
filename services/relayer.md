@@ -8,4 +8,4 @@ The relayer submit transactions received by the UI to StarkNet. It will include 
 
 #### Public API
 
-[https://mana-r4amf.ondigitalocean.app](https://mana-r4amf.ondigitalocean.app/) (Görli)
+[https://mana.pizza](https://mana.pizza/) (Goerli)

@@ -8,5 +8,5 @@ The [API](https://github.com/snapshot-labs/sx-api) indexes Snapshot X data. Spec
 
 #### Public APIs
 
-[https://goerli-api-1.snapshotx.xyz](https://goerli-api-1.snapshotx.xyz) (Görli)\
-[https://goerli-api-2.snapshotx.xyz](https://goerli-api-2.snapshotx.xyz) (Görli)
+[https://testnet-api-1.snapshotx.xyz](https://testnet-api-1.snapshotx.xyz/) (Goerli)\
+[https://testnet-api-2.snapshotx.xyz](https://testnet-api-2.snapshotx.xyz/) (Goerli)

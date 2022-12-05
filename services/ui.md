@@ -8,4 +8,4 @@ The UI is the official interface for Snapshot X
 
 #### Demo UI
 
-[https://goerli.snapshotx.xyz](https://goerli.snapshotx.xyz/#/) (Görli)
+[https://testnet.snapshotx.xyz](https://testnet.snapshotx.xyz/) (Goerli)

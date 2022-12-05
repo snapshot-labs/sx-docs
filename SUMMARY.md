@@ -7,8 +7,8 @@
 * [Overview](protocol/overview.md)
 * [Space](protocol/space.md)
 * [Authenticators](protocol/authenticators.md)
-* [Voting Strategies](protocol/voting-strategies.md)
-* [Execution Strategies](protocol/execution-strategies.md)
+* [Voting strategies](protocol/voting-strategies.md)
+* [Execution strategies](protocol/execution-strategies.md)
 
 ## Services
 
