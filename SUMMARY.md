@@ -2,14 +2,6 @@
 
 * [Home](README.md)
 
-## Protocol
-
-* [Overview](protocol/overview.md)
-* [Space](protocol/space.md)
-* [Authenticators](protocol/authenticators.md)
-* [Voting strategies](protocol/voting-strategies.md)
-* [Execution strategies](protocol/execution-strategies.md)
-
 ## Protocol: SX-EVM
 
 * [Overview](protocol-sx-evm/overview.md)

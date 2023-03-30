@@ -13,7 +13,7 @@ This approach allows a far higher degree of modularity and customisability than 
 
 Creating a space on Snapshot X is **like creating a new character in a game**. First you need to select an armour to protect your character, then you need to decide on a weapon (spear, sword, bow). Finally, you need to choose a mount for your character to get him to travel from town to town faster.
 
-With that analogy in mind, think about the **Space** contract like the character, and the [**Authenticators**](authenticators.md), [**Proposal Validation Strategies**](proposal-validation-strategies.md), [**Voting Strategies**](../protocol/voting-strategies.md)**,** and [**Execution Strategies**](execution-strategies.md) like the different add-ons you need to decide on. We refer to them collectively as **Snapshot X Modules**.&#x20;
+With that analogy in mind, think about the **Space** contract like the character, and the [**Authenticators**](authenticators.md), [**Proposal Validation Strategies**](proposal-validation-strategies.md), [**Voting Strategies**](broken-reference)**,** and [**Execution Strategies**](execution-strategies.md) like the different add-ons you need to decide on. We refer to them collectively as **Snapshot X Modules**.&#x20;
 
 Let's go over those briefly:
 
