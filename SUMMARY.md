@@ -15,7 +15,7 @@
 ## Services
 
 * [Architecture](services/architecture.md)
-* [Relayer](services/relayer.md)
+* [Mana](services/mana.md)
 * [API](services/api.md)
 * [UI](services/ui.md)
 * [SX.js](services/sx.js.md)
@@ -23,5 +23,5 @@
 ## Community
 
 * [Discord](http://discord.gg/snapshot)
-* [Telegram](https://telegram.snapshot.org/)
 * [GitHub](https://github.com/snapshot-labs)
+* [Twitter](https://twitter.com/SnapshotLabs)

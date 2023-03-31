@@ -1,6 +1,6 @@
 # UI
 
-The UI is the official interface for Snapshot X
+The UI is the official interface for Snapshot X.&#x20;
 
 #### GitHub
 
