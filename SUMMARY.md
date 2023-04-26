@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Home](README.md)
+* [Snapshot X](README.md)
 
 ## Protocol: SX-EVM
 

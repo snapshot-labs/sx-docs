@@ -33,7 +33,7 @@ Go to the space page on Snapshot. You can vote directly from this view or go to 
 In the proposal page you can see your Voting Power. If it shows `0` it means you cannot vote on the selected proposal. \
 
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
