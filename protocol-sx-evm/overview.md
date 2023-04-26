@@ -20,13 +20,13 @@ Let's go over those briefly:
 **Authenticators** \
 Determine how the participants can be _authenticated_ to create a proposal or cast a vote. In general this will be some kind of signature or transaction caller verification.&#x20;
 
-**Proposal Validation Strategies**\
+**Proposal validation strategies**\
 Determine how an author is validated to create a proposal. A common approach is checking that the author exceeds a certain threshold proposition power calculated through a set of strategies. &#x20;
 
-**Voting Strategies**\
+**Voting strategies**\
 Determine how the voting power is computed. Voting strategies are custom contracts that allow you to determine how you compute the voting power of each participant in the vote. Arbitrary logic can be implemented here to create complex and expressive governance mechanisms. The most common way of voting is voting with your tokens (1 token = 1 voting power, so if you have 100 tokens you get a total voting power of 100). This is a voting strategy. But you could imagine other voting strategies: for example, only give voting power to the owners of a specific NFT. Or maybe use a quadratic model, where users only get the square root of their token balance (to minimise the power of whales).&#x20;
 
-**Execution Strategies**\
+**Execution strategies**\
 Have two key roles:&#x20;
 
 1\) Determine the _status_ of a proposal at any time during its lifetime.

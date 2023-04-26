@@ -1,4 +1,4 @@
-# Space Controller Actions
+# Space controller actions
 
 In this section we will go over the actions that can be made by the Space Controller. Note that we use Open Zeppelin's [`OwnableUpgradable`](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/access/OwnableUpgradeable.sol) module to gate access to this functions, and therefore at the contract level we use the term `owner` instead of `controller`. &#x20;
 
@@ -14,7 +14,7 @@ function cancel(uint256 proposalId) external;
 
 This can be used to prevent damage from malicious or broken proposals.
 
-### Update Space Settings
+### Update space settings
 
 All Space settings can be updated using the following functions:
 
@@ -45,7 +45,7 @@ function removeAuthenticators(address[] calldata _authenticators) external;
 Note that Space setting updates will not affect the functioning of ongoing proposals at the time of the settings update since we store the necessary settings data inside the state of each proposal.&#x20;
 {% endhint %}
 
-### Upgrade Implementation
+### Upgrade implementation
 
 A Space contract's implementation can be upgraded to a new version using the following methods: &#x20;
 
@@ -60,7 +60,7 @@ function upgradeToAndCall(address newImplementation, bytes memory data) external
 
 Refer to [Open Zeppelin's UUPS guide](https://docs.openzeppelin.com/contracts/4.x/api/proxy#UUPSUpgradeable) for more information.&#x20;
 
-### Manage Ownership&#x20;
+### Manage ownership&#x20;
 
 ```solidity
 function transferOwnership(address newOwner) external;

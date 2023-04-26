@@ -6,7 +6,7 @@ Authenticators are the contracts in charge of **authenticating users** to create
 
 DAOs are free to write their own custom authenticators that suit their own needs however we provide the following approaches:
 
-### Ethereum Signature Authenticator
+### Ethereum signature authenticator
 
 Will authenticate a user based on a message signed by an Ethereum private key. Users create an EIP712 signature for the transaction which is checked for validity in this contract.&#x20;
 
@@ -30,7 +30,7 @@ function authenticate(
 
 This can work in conjunction with a meta transaction relayer to allow proposal creation or vote costs to be sponsored by the DAO, providing a free end user experience.
 
-### Ethereum Transaction Authenticator
+### Ethereum transaction authenticator
 
 Will authenticate a user by checking if the caller address corresponds to the `author` or `voter` address.&#x20;
 

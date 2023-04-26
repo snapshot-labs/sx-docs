@@ -1,6 +1,6 @@
-# Proposal Validation Strategies
+# Proposal validation strategies
 
-**Proposal Validation Strategy is used to determine whether a particular `author` is allowed to create a proposal.**&#x20;
+**Proposal validation strategy is used to determine whether a particular `author` is allowed to create a proposal.**&#x20;
 
 Each Space has to set a proposal validation strategy which consists of an address and a set of `params` that are stored in the space. These strategies should have the following interface:&#x20;
 
@@ -16,7 +16,7 @@ There is no requirement to use either of these parameter arrays in your strategy
 
 DAOs are free to write their own custom strategies that suit their own needs however we provide the following approaches:
 
-### Proposition Power
+### Proposition power
 
 A strategy that validates an `author` to create a proposal if their `propositionPower` calculated from a set of voting strategies exceeds a `proposalThreshold` value. It means that if the proposal threshold is set to `5`, the author needs to have at least `5` proposition power to create a proposal. This strategy uses the same logic as [Voting Strategies](https://app.gitbook.com/o/-LFgTZvhAg63US8GVxGf/s/Z1apxjsgt60dN7Nlmu01/\~/changes/20/protocol-sx-evm/voting-strategies), so refer to that section for more information.
 
@@ -35,7 +35,7 @@ IndexedStrategy[] userStrategies = ...
 userParams = abi.encode(userStrategies);
 ```
 
-### Active Proposal Limiter&#x20;
+### Active proposal limiter&#x20;
 
 A strategy that validates an `author` to create a proposal if the `author` has not exceeded a limit of `maxActiveProposals`.
 

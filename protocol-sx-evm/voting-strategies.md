@@ -1,4 +1,4 @@
-# Voting Strategies
+# Voting strategies
 
 Voting strategies are the contracts used to **determine the voting power (VP) of users**. Voting strategies can be created in a **permissionless** way, however to use one, one must whitelist the strategy in the space contract for your DAO.
 
@@ -46,9 +46,9 @@ params = abi.encodePacked(tokenAddress)
 
 `userParams` is not needed. &#x20;
 
-### [Open Zeppelin Style Checkpoint Token](https://github.com/snapshot-labs/sx-evm/blob/main/src/voting-strategies/OZVotesVotingStrategy.sol)
+### [OpenZeppelin Style Checkpoint Token](https://github.com/snapshot-labs/sx-evm/blob/main/src/voting-strategies/OZVotesVotingStrategy.sol)
 
-A strategy that allows delegated balances of Open Zeppelin style checkpoint tokens to be used as voting power. To use this strategy, your token must have the following interface exposed:&#x20;
+A strategy that allows delegated balances of OpenZeppelin style checkpoint tokens to be used as voting power. To use this strategy, your token must have the following interface exposed:&#x20;
 
 ```solidity
 function getPastVotes(address account, uint256 blockNumber) external view returns (uint256);

@@ -1,4 +1,4 @@
-# Execution Strategies
+# Execution strategies
 
 Execution Strategies have two key roles:
 
@@ -9,7 +9,7 @@ Each proposal should have an execution strategy set when it is created. This con
 
 This page provides more details on the Execution Strategies along with implementations that we offer.&#x20;
 
-## Proposal Status
+## Proposal status
 
 Every execution strategy should have a public view function `getProposalStatus` with the following interface:
 
@@ -72,7 +72,7 @@ If the total votes are less than `emergencyQuorum`, then the proposal status is 
 This can be useful for emergency actions in response to critical events such as hacks, where one can expect much higher participation in the governance vote than during normal processes and therefore a 'tradeoff' between proposal duration and proposal participation can be made.&#x20;
 {% endhint %}
 
-## Proposal Execution
+## Proposal execution
 
 If the proposal status is `Accepted` (or `VotingPeriodAccepted`) the execution strategy should then execute the proposal payload. We provide the following payload executor implementations:&#x20;
 
@@ -108,7 +108,7 @@ struct MetaTransaction {
 
 There is also an optional `vetoGuardian` role that has the power to `veto` a queued proposal.&#x20;
 
-### Cross Chain Execution (Coming Soon)
+### Cross chain execution (coming soon)
 
 An execution strategy that forwards an execution payload to another chain to be executed there.&#x20;
 

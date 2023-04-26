@@ -1,4 +1,4 @@
-# Space Actions
+# Space actions
 
 [Space](https://github.com/snapshot-labs/sx-core/blob/develop/contracts/starknet/space/space.cairo) is the core contract: it's in charge of tracking proposals, votes, and general settings. In this section we will go into detail on how to deploy a space, and the various user actions that can take place.&#x20;
 
@@ -113,7 +113,7 @@ function execute(uint256 proposalId, bytes calldata executionPayload) external;
 * `proposalId`: The ID of the proposal.&#x20;
 * `executionPayload`: The payload of the execution. This must be the same as the payload passed when a proposal was created. We require the payload to be resubmitted because we don't store it inside the proposal state, instead we just its hash.&#x20;
 
-### Querying the Proposal State
+### Querying the proposal state
 
 We provide the following view functions to access the proposal state and status at any time.&#x20;
 
