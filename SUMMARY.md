@@ -12,6 +12,15 @@
 * [Voting Strategies](protocol-sx-evm/voting-strategies.md)
 * [Execution Strategies](protocol-sx-evm/execution-strategies.md)
 
+## User guides
+
+* [Where to start?](user-guides/where-to-start.md)
+* [Spaces](user-guides/spaces/README.md)
+  * [Create a space](user-guides/spaces/create-a-space.md)
+  * [Avatar execution setup](user-guides/spaces/avatar-execution-setup.md)
+* [Proposals](user-guides/proposals.md)
+* [Voting](user-guides/voting.md)
+
 ## Services
 
 * [Architecture](services/architecture.md)

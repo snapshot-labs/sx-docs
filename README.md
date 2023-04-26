@@ -14,8 +14,7 @@ Welcome to Snapshot X's documentation. If you're looking for specific technical 
 
 ## What's in this book?
 
-* Protocol : Documentation on the Snapshot X protocol and how to extend it to fit your use case.
-* Services : Documentation on the various offchain services that were built to enhance the UX of interacting with the protocol.
+<table data-view="cards"><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td><h2>Protocol</h2></td><td>Technical documentation for Snapshot X protocol.<br><br>Go here if you want to integrate Snapshot X in your platform or extend its functionality.</td><td></td></tr><tr><td><h2>User guides</h2></td><td>Non-technical documentation for the platform.</td><td><br>Go here if you want to create a space, proposal or cast a vote.</td></tr><tr><td><h2>Services</h2><p>Overview of the services built for a better UX when interacting with the protocol.<br><br>Go here if you want to integrate Snapshot X in your platform.<br></p></td><td></td><td></td></tr></tbody></table>
 
 If anything in these docs is unclear or you would like more detail, do not hesitate to reach out on [Discord](https://discord.gg/snapshot).
 
