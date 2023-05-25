@@ -16,29 +16,42 @@ This can be used to prevent damage from malicious or broken proposals.
 
 ### Update space settings
 
-All Space settings can be updated using the following functions:
+All Space settings can be updated using the `updateSettings` function:
 
 ```solidity
-function setVotingDelay(uint32 delay) external;
+function updateSettings(UpdateSettingsInput calldata input) external;
 
-function setMinVotingDuration(uint32 duration) external;
+struct UpdateSettingsInput {
+    uint32 minVotingDuration;
+    uint32 maxVotingDuration;
+    uint32 votingDelay;
+    string metadataURI;
+    string daoURI;
+    Strategy proposalValidationStrategy;
+    string proposalValidationStrategyMetadataURI;
+    address[] authenticatorsToAdd;
+    address[] authenticatorsToRemove;
+    Strategy[] votingStrategiesToAdd;
+    string[] votingStrategyMetadataURIsToAdd;
+    uint8[] votingStrategiesToRemove;
+}
+```
 
-function setMaxVotingDuration(uint32 duration) external;
+A single entrypoint is used instead of separate ones for each value so that a single transaction can be used to update a large number of settings. This improves the UX while also preventing undesired behaviour that may arise if proposals are created half way though the settings update process. 
 
-function setProposalValidationStrategy(Strategy calldata proposalValidationStrategy) external;
+If one does not want to update a certain value, then the following placeholder values can be used in the function call (arrays can just be left empty): 
 
-function setMetadataURI(string calldata metadataURI) external;
+```solidity
+    /// @dev Evaluates to: `0xf2cda9b13ed04e585461605c0d6e804933ca828111bd94d4e6a96c75e8b048ba`.
+    bytes32 NO_UPDATE_HASH = keccak256(abi.encodePacked("No update"));
 
-function addVotingStrategies(
-    Strategy[] calldata votingStrategies,
-    string[] calldata votingStrategyMetadataURIs
-) external;
+    /// @dev Evaluates to: `0xf2cda9b13ed04e585461605c0d6e804933ca8281`.
+    address NO_UPDATE_ADDRESS = address(bytes20(keccak256(abi.encodePacked("No update"))));
 
-function removeVotingStrategies(uint8[] calldata indicesToRemove) external;
-
-function addAuthenticators(address[] calldata _authenticators) external;
-
-function removeAuthenticators(address[] calldata _authenticators) external;
+    /// @dev Evaluates to: `0xf2cda9b1`.
+    uint32 NO_UPDATE_UINT32 = uint32(bytes4(keccak256(abi.encodePacked("No update"))));
+    
+    Strategy NO_UPDATE_STRATEGY = Strategy(NO_UPDATE_ADDRESS, new bytes(0));
 ```
 
 {% hint style="warning" %}
