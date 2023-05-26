@@ -117,17 +117,15 @@ function execute(uint256 proposalId, bytes calldata executionPayload) external;
 * `proposalId`: The ID of the proposal.&#x20;
 * `executionPayload`: The payload of the execution. This must be the same as the payload passed when a proposal was created. We require the payload to be resubmitted because we don't store it inside the proposal state, instead we just its hash.&#x20;
 
-### Querying the proposal state
+### Querying the proposal status
 
-We provide the following view functions to access the proposal state and status at any time.&#x20;
+We provide the following view function to access the proposal status at any time.&#x20. 
 
 ```solidity
-function getProposal(uint256 proposalId) external view returns (Proposal memory proposal);
-
-function hasVoted(uint256 proposalId, address voter) external view returns (bool);
-
 function getProposalStatus(uint256 proposalId) external view returns (ProposalStatus proposalStatus);
 ```
+
+The status of a proposal is actually defined by the execution strategy chosen rather than the space itself, therefore this query actually makes an internal call to the execution strategy of the proposal. Refer to the [execution strategies](https://docs.snapshotx.xyz/protocol/execution-strategies) section for more information. 
 
 * `proposalId`: The ID of the proposal to query.
 * `voter`: The address of the voter to query.
