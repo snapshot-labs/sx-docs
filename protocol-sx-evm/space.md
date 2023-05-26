@@ -129,3 +129,13 @@ function getProposalStatus(uint256 proposalId) external view returns (ProposalSt
 * `voter`: The address of the voter to query.
 * `proposal`: The proposal state struct object, defined [here](https://github.com/snapshot-labs/sx-evm/blob/aaed4d0dd2ad915e05fb7bad094f587fed113f7b/src/types.sol#L8).&#x20;
 * `proposalStatus`: The status of a proposal at the timestamp when queried. This function will send an internal call to the `getProposalStatus` method on the execution strategy. Refer to the [Execution Strategy](https://app.gitbook.com/o/-LFgTZvhAg63US8GVxGf/s/Z1apxjsgt60dN7Nlmu01/\~/changes/20/protocol-sx-evm/execution-strategies) section for more information.
+
+### ERC-4824: Decentralized Autonomous Organizations
+
+The Space contract implements ERC-4824 which is a standard URI and JSON schema for DAOs, focusing on relating on-chain and off-chain representations of membership and proposals. More information can be found [here](https://ethereum-magicians.org/t/erc-4824-decentralized-autonomous-organizations/8362). The standard adds a `daoURI` string to the space settings which can be queried using the following interface: 
+
+```solidity 
+interface EIP4824 {
+    function daoURI() external view returns (string _daoURI);
+}
+```
