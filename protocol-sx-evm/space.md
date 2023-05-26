@@ -17,11 +17,13 @@ function initialize(
     uint32 minVotingDuration,
     uint32 maxVotingDuration,
     Strategy memory proposalValidationStrategy,
+    string memory proposalValidationStrategyMetadataURI,
+    string memory daoURI,
     string memory metadataURI,
     Strategy[] memory votingStrategies,
     string[] memory votingStrategyMetadataURIs,
     address[] memory authenticators
-    ) external;
+) external;
 ```
 
 * `owner`: The address of the account that controls the Space contract. This account will have permissions to update space settings, cancel a proposal, and authorize an upgrade to the implementation. If you would like to remove this trust assumption, the owner can be renounced. Refer to the [Space Controller Actions](https://app.gitbook.com/o/-LFgTZvhAg63US8GVxGf/s/Z1apxjsgt60dN7Nlmu01/\~/changes/20/protocol-sx-evm/space-controller-actions/\~/comments/fcFuXklCNuVwwR4p8p3O) section for more information.
@@ -29,6 +31,8 @@ function initialize(
 * `minVotingDuration`: The minimum duration of the voting period. It is **impossible to execute a proposal before** **this period** has elapsed.&#x20;
 * `maxVotingDuration`: The maximum duration of the voting period, it is **impossible to cast a vote after this period** has passed. The `minVotingDuration` must be less than or equal to this value.
 * `proposalValidationStrategy`: A strategy that validates whether an author can create a proposal. The strategy consists of a contract address where the strategy lives, along with a set of parameters that configure it for the particular usage. More information in the [Proposal Validation Strategy](https://app.gitbook.com/o/-LFgTZvhAg63US8GVxGf/s/Z1apxjsgt60dN7Nlmu01/\~/changes/20/protocol-sx-evm/proposal-validation-strategies) section.
+* `proposalValidationStrategyMetadataURI`: A metadata URI corresponding to the `proposalValidationStrategy`.
+* `daoURI`: A metadata URI as defined in ERC-4824.
 * `metadataURI`: The metadata URI for the space (its name, description, social tags and treasury address).
 * `votingStrategies`: An array of voting strategies selected for the space. The voting power of each user will be calculated as the sum of voting powers returned for each strategy in the list for that user. More information in the [Voting Strategy](https://docs.snapshotx.xyz/protocol/voting-strategies) section.
 * `votingStrategyMetadataURIs`: An array of metadata URIs corresponding to the `votingStrategies` array.&#x20;
@@ -113,17 +117,15 @@ function execute(uint256 proposalId, bytes calldata executionPayload) external;
 * `proposalId`: The ID of the proposal.&#x20;
 * `executionPayload`: The payload of the execution. This must be the same as the payload passed when a proposal was created. We require the payload to be resubmitted because we don't store it inside the proposal state, instead we just its hash.&#x20;
 
-### Querying the proposal state
+### Querying the proposal status
 
-We provide the following view functions to access the proposal state and status at any time.&#x20;
+We provide the following view function to access the proposal status at any time.&#x20. 
 
 ```solidity
-function getProposal(uint256 proposalId) external view returns (Proposal memory proposal);
-
-function hasVoted(uint256 proposalId, address voter) external view returns (bool);
-
 function getProposalStatus(uint256 proposalId) external view returns (ProposalStatus proposalStatus);
 ```
+
+The status of a proposal is actually defined by the execution strategy chosen rather than the space itself, therefore this query actually makes an internal call to the execution strategy of the proposal. Refer to the [execution strategies](https://docs.snapshotx.xyz/protocol/execution-strategies) section for more information. 
 
 * `proposalId`: The ID of the proposal to query.
 * `voter`: The address of the voter to query.
