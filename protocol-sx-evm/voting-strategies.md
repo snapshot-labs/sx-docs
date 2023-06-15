@@ -6,7 +6,7 @@ The most common example is using the ERC-20 token balance of a user to determine
 
 Snapshot X reaches this standard, and we are excited to see what people build!
 
-**All voting strategies must have a the following** [**interface**](https://github.com/snapshot-labs/sx-evm/blob/main/src/interfaces/IVotingStrategy.sol)**:**&#x20;
+**All voting strategies must have the following** [**interface**](https://github.com/snapshot-labs/sx-evm/blob/main/src/interfaces/IVotingStrategy.sol)**:**&#x20;
 
 ```solidity
 function getVotingPower(
