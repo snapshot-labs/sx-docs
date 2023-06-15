@@ -108,7 +108,7 @@ Calling the `execute` function on the space will call the execution strategy wit
 
 If the proposal status is deemed to be `Accepted,` then the payload will be automatically executed by the strategy.&#x20;
 
-If the proposal status is not  `Accepted` (or `VotingPeriodAccepted`), then the transaction will revert. Note that there is no caller authentication on `execute`, simply call the`execute` method on the Space contract directly:&#x20;
+If the proposal status is not  `Accepted` (or `VotingPeriodAccepted`), then the transaction will revert. Note that there is no caller authentication on `execute`, simply call the `execute` method on the Space contract directly:&#x20;
 
 ```solidity
 function execute(uint256 proposalId, bytes calldata executionPayload) external;
