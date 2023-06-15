@@ -1,6 +1,6 @@
 # Space controller actions
 
-In this section we will go over the actions that can be made by the Space Controller. Note that we use Open Zeppelin's [`OwnableUpgradable`](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/access/OwnableUpgradeable.sol) module to gate access to this functions, and therefore at the contract level we use the term `owner` instead of `controller`. &#x20;
+In this section we will go over the actions that can be made by the Space Controller. Note that we use Open Zeppelin's [`OwnableUpgradable`](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/access/OwnableUpgradeable.sol) module to gate access to these functions, and therefore at the contract level we use the term `owner` instead of `controller`. &#x20;
 
 ### Cancel a proposal
 
@@ -37,7 +37,7 @@ struct UpdateSettingsInput {
 }
 ```
 
-A single entrypoint is used instead of separate ones for each value so that a single transaction can be used to update a large number of settings. This improves the UX while also preventing undesired behaviour that may arise if proposals are created half way though the settings update process. 
+A single entrypoint is used instead of separate ones for each value so that a single transaction can be used to update a large number of settings. This improves the UX while also preventing undesired behaviour that may arise if proposals are created half way through the settings update process. 
 
 If one does not want to update a certain value, then the following placeholder values can be used in the function call (arrays can just be left empty): 
 
