@@ -3,7 +3,6 @@ description: >-
   Welcome to Snapshot X's documentation. If you're looking for specific
   technical details or just want a broad overview of the protocol, you've come
   to the right place!
-layout: landing
 ---
 
 # Snapshot X

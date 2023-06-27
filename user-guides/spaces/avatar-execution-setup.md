@@ -34,7 +34,7 @@ Click the `App` tab in the sidebar to open the list of available Safe applicatio
 
 Click on `Custom Module.`
 
-<figure><img src="../../.gitbook/assets/Screenshot 2023-04-26 at 11.04.24.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2023-04-26 at 11.04.24 (1).png" alt=""><figcaption></figcaption></figure>
 
 Paste the contract's address you copied in the first step in the `Module Address` field.
 
