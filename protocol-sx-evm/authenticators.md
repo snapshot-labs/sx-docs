@@ -48,4 +48,9 @@ The core use case for this authenticator is to allow **smart contract accounts s
 
 ### And more!
 
-Our modular approach here allows spaces to **authenticate users via other authentication methods without any changes to the space contract**. For example if you wanted to add sybil resistance to your governance, you could implement an authenticator which checks if a user is a member of sybil resistant registry.&#x20;
+Our modular approach here allows spaces to **authenticate users via other authentication methods without any changes to the space contract**.&#x20;
+
+{% hint style="info" %}
+Please note, that if you wanted to add sybil resistance to your governance process, this should not be handled by Authenticators, but by [Proposal Validation](proposal-validation-strategies.md) or [Voting Strategies](voting-strategies.md).
+{% endhint %}
+
