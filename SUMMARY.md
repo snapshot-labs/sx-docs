@@ -11,6 +11,7 @@
 * [Proposal validation strategies](protocol-sx-evm/proposal-validation-strategies.md)
 * [Voting strategies](protocol-sx-evm/voting-strategies.md)
 * [Execution strategies](protocol-sx-evm/execution-strategies.md)
+* [Audits](protocol-sx-evm/audits.md)
 
 ## User guides
 
