@@ -21,18 +21,18 @@ function getVotingPower(
 
 There are two sets of parameters for each voting strategy, `params` and `userParams`.
 
-* `params` are set in the space contract and are the same for every user who calls that strategy in the space, they act as configuration parameters for a strategy. Examples here are token contract address that will be queried, or a constant scaling factor that should be applied to the VP returned for every user.
-* `userParams` are submitted by users when they create a proposal or cast a vote, and can therefore be different for each user. Example here is a storage proof.
+* `params` are set in the space contract and are the same for every user who calls that strategy in the space, they act as configuration parameters for a strategy. An example here is a token contract address that will be queried, or a constant scaling factor that should be applied to the VP returned for every user.
+* `userParams` are submitted by users when they create a proposal or cast a vote, and can therefore be different for each user. An example here is a storage proof.
 
 There is no requirement to use either of these parameter arrays in your strategy, in which case you can just pass an empty array.
 
-When a user casts a vote, the array of whitelisted voting strategies will be iterated through and `getVotingPower` will be called on each. The VP of the user will be the aggregate of the voting power from each strategy. The aggregate voting power for all users is also stored inside a `Uint256`, therefore when writing or selecting voting strategies, it is **important to consider the likelihood of overflow**.
+When a user casts a vote, the array of whitelisted Voting strategies will be iterated through and `getVotingPower` will be called on each. The VP of the user will be the aggregate of the voting power from each strategy. The aggregate Voting power for all users is also stored inside a `Uint256`, therefore when writing or selecting voting strategies, it is **important to consider the likelihood of overflow**.
 
 DAOs are free to write their own custom strategies that suit their own needs however we provide the following approaches:
 
 ### [Compound Style Checkpoint Token](https://github.com/snapshot-labs/sx-evm/blob/main/src/voting-strategies/CompVotingStrategy.sol)
 
-A strategy that allows delegated balances of Compound style checkpoint tokens to be used as voting power. To use this strategy, your token must have the following interface exposed:&#x20;
+A strategy that allows delegated balances of Compound style checkpoint tokens to be used as Voting power. To use this strategy, your token must have the following interface exposed:&#x20;
 
 ```solidity
 function getPriorVotes(address account, uint256 blockNumber) external view returns (uint96);
@@ -48,7 +48,7 @@ params = abi.encodePacked(tokenAddress)
 
 ### [OpenZeppelin Style Checkpoint Token](https://github.com/snapshot-labs/sx-evm/blob/main/src/voting-strategies/OZVotesVotingStrategy.sol)
 
-A strategy that allows delegated balances of OpenZeppelin style checkpoint tokens to be used as voting power. To use this strategy, your token must have the following interface exposed:&#x20;
+A strategy that allows delegated balances of OpenZeppelin style checkpoint tokens to be used as Voting power. To use this strategy, your token must have the following interface exposed:&#x20;
 
 ```solidity
 function getPastVotes(address account, uint256 blockNumber) external view returns (uint256);
@@ -64,7 +64,7 @@ params = abi.encodePacked(tokenAddress)
 
 ### [Whitelist](https://github.com/snapshot-labs/sx-evm/blob/main/src/voting-strategies/WhitelistStrategy.sol)
 
-A strategy that returns a specified voting power for addresses that are within a whitelist, and zero otherwise. Having a customisable VP for each user allows more fine grained control than enforcing a VP of 1 for everyone - which can still be achieved by just setting the value to 1 for each member of the list.  Each member of the whitelist should be represented as the struct:
+A strategy that returns a specified Voting power for addresses that are within a whitelist, and zero otherwise. Having a customisable VP for each user allows more fine-grained control than enforcing a VP of 1 for everyone - which can still be achieved by just setting the value to 1 for each member of the list.  Each member of the whitelist should be represented as the struct:
 
 ```solidity
 struct Member {

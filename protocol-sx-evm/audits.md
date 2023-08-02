@@ -1,6 +1,6 @@
 # Audits
 
-Snapshot has completed full audit with ChainSecurity.
+Snapshot X EVM has completed a full audit with [ChainSecurity](https://chainsecurity.com/).
 
 | Scope  | Company       | Date     | Report                                                                                                               |
 | ------ | ------------- | -------- | -------------------------------------------------------------------------------------------------------------------- |
