@@ -6,6 +6,6 @@ The UI is the official interface for Snapshot X.&#x20;
 
 [https://github.com/snapshot-labs/sx-ui](https://github.com/snapshot-labs/sx-ui)
 
-#### Demo UI
+#### UI
 
-[https://testnet.snapshotx.xyz](https://testnet.snapshotx.xyz/) (Goerli)
+[https://snapshotx.xyz](https://snapshotx.xyz/)

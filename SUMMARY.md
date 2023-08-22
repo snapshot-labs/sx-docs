@@ -25,13 +25,13 @@
 ## Services
 
 * [Architecture](services/architecture.md)
-* [Mana](services/mana.md)
 * [API](services/api.md)
-* [UI](services/ui.md)
 * [SX.js](services/sx.js.md)
+* [UI](services/ui.md)
+* [Mana](services/mana.md)
 
 ## Community
 
 * [Discord](http://discord.gg/snapshot)
-* [GitHub](https://github.com/snapshot-labs)
 * [Twitter](https://twitter.com/SnapshotLabs)
+* [GitHub](https://github.com/snapshot-labs)
