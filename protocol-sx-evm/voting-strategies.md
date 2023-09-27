@@ -1,16 +1,16 @@
 # Voting strategies
 
-Voting strategies are the contracts used to **determine the voting power (VP) of users**. Voting strategies can be created in a **permissionless** way, however to use one, one must whitelist the strategy in the space contract for your DAO.
+Voting strategies are the contracts used to **determine the voting power (VP) of users**. Voting strategies can be created in a **permissionless** way, however, to use one, one must whitelist the strategy in the space contract for your DAO.
 
-The most common example is using the ERC-20 token balance of a user to determine their voting power. But you could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol xyz... the possibilities are endless! We are fans of the [Turing Complete Governance](https://baby.mirror.xyz/O7a922A-9zT4C4UwssRExkftdHywJ-13sR2rxQ-t\_\_k), the concept of governance system with arbitrary programmability. This will allow complex and expressive mechanisms of coordination to be seemlessly integrated into governance decisions.&#x20;
+The most common example is using the ERC-20 token balance of a user to determine their voting power. But you could imagine other voting strategies: owning a specific NFT, owning NFT of collection X and another NFT of collection Y, having participated in protocol XYZ... the possibilities are endless! We are fans of the [Turing Complete Governance](https://baby.mirror.xyz/O7a922A-9zT4C4UwssRExkftdHywJ-13sR2rxQ-t\_\_k), the concept of a governance system with arbitrary programmability. This will allow complex and expressive mechanisms of coordination to be seamlessly integrated into governance decisions.&#x20;
 
 Snapshot X reaches this standard, and we are excited to see what people build!
 
-**All voting strategies must have a the following** [**interface**](https://github.com/snapshot-labs/sx-evm/blob/main/src/interfaces/IVotingStrategy.sol)**:**&#x20;
+**All voting strategies must have the following** [**interface**](https://github.com/snapshot-labs/sx-evm/blob/main/src/interfaces/IVotingStrategy.sol)**:**&#x20;
 
 ```solidity
 function getVotingPower(
-    uint32 timestamp,
+    uint32 blockNumber,
     address voterAddress,
     bytes calldata params,
     bytes calldata userParams
@@ -22,7 +22,7 @@ function getVotingPower(
 There are two sets of parameters for each voting strategy, `params` and `userParams`.
 
 * `params` are set in the space contract and are the same for every user who calls that strategy in the space, they act as configuration parameters for a strategy. An example here is a token contract address that will be queried, or a constant scaling factor that should be applied to the VP returned for every user.
-* `userParams` are submitted by users when they create a proposal or cast a vote, and can therefore be different for each user. An example here is a storage proof.
+* `userParams` are submitted by users when they create a proposal or cast a vote, and can therefore be different for each user. An example here is storage proof.
 
 There is no requirement to use either of these parameter arrays in your strategy, in which case you can just pass an empty array.
 
