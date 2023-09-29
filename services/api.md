@@ -13,5 +13,4 @@ The [API](https://github.com/snapshot-labs/sx-api) indexes Snapshot X data. Spec
 [https://api.studio.thegraph.com/query/23545/sx-arbitrum/version/latest](https://api.studio.thegraph.com/query/23545/sx-arbitrum/version/latest) (Arbitrum)\
 [https://api.studio.thegraph.com/query/23545/sx-sepolia/version/latest](https://api.studio.thegraph.com/query/23545/sx-sepolia/version/latest) (Sepolia)\
 [https://api.studio.thegraph.com/query/23545/sx-goerli/version/latest](https://api.studio.thegraph.com/query/23545/sx-goerli/version/latest) (Goerli)\
-[https://api-1.snapshotx.xyz](https://api-1.snapshotx.xyz/) (Starknet testnet 2)\
-[https://api-2.snapshotx.xyz](https://api-2.snapshotx.xyz/) (Starknet testnet 2)
+[https://api-1.snapshotx.xyz](https://api-1.snapshotx.xyz/) (Starknet testnet)\
