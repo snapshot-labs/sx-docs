@@ -95,9 +95,7 @@ const envelope = await ethSigClient.vote({
 
 const receipt = await client.vote({
   signer: web3.getSigner(),
-  envelope: {
-    envelope
-  }
+  envelope
 });
 
 console.log('Receipt', receipt);
@@ -161,9 +159,7 @@ const envelope = await ethSigClient.propose({
 
 const receipt = await client.propose({
   signer: web3.getSigner(),
-  envelope: {
-    envelope
-  }
+  envelope
 });
 
 console.log('Receipt', receipt);
@@ -219,9 +215,7 @@ const envelope = await ethSigClient.updateProposal({
 
 const receipt = await client.updateProposal({
   signer: web3.getSigner(),
-  envelope: {
-    envelope
-  }
+  envelope
 });
 
 console.log('Receipt', receipt);
