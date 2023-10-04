@@ -28,15 +28,47 @@ yarn add @snapshot-labs/sx@beta
 
 #### Clients
 
-Everything happens thanks to the `clients` objects. Depending on the specific Space or Proposal setup, you may need to use a Transaction or Signature Client. This quick guide demonstrates how to easily set all of them up, both for Ethereum and Starknet:
+Everything happens thanks to the `clients` objects. Depending on the specific Space or Proposal setup, you may need to use a Transaction or Signature Client. This quick guide demonstrates how to easily set all of them up, both for Ethereum and StarkNet:
 
-<pre class="language-typescript"><code class="lang-typescript">import { clients, evmSepolia } from '@snapshot-labs/sx';
-<strong>
-</strong><strong>const clientConfig = { networkConfig: evmSepolia }
-</strong><strong>
-</strong>const client = new clients.EthereumTx(clientConfig);
+{% tabs %}
+{% tab title="EVM Clients" %}
+```typescript
+import { clients, evmSepolia } from '@snapshot-labs/sx';
+
+const clientConfig = { networkConfig: evmSepolia }
+
+const client = new clients.EthereumTx(clientConfig);
 const ethSigClient = new clients.EthereumSig(clientConfig);
-</code></pre>
+```
+{% endtab %}
+
+{% tab title="StarkNet Clients" %}
+```typescript
+import { clients } from '@snapshot-labs/sx';
+import type { Provider } from 'starknet';
+
+const ethUrl = 'https://rpcs.snapshotx.xyz/1';
+const manaUrl = 'https://mana.pizza';
+
+const starkProvider = new Provider({
+    sequencer: {
+      baseUrl: 'http://127.0.0.1:5050/'
+    }
+  });
+
+const clientConfig = {
+  starkProvider,
+  manaUrl,
+  ethUrl
+};
+
+const client = new clients.StarkNetTx(clientConfig);
+const starkSigClient = new clients.StarkNetSig(clientConfig);
+```
+{% endtab %}
+{% endtabs %}
+
+To learn more about StarkNet's `Provider` object, have a look [here](https://www.starknetjs.com/docs/guides/connect\_network).
 
 ## Usage
 
@@ -48,7 +80,15 @@ Make sure to use the right client for your use case. The examples below use Sepo
 
 {% tabs %}
 {% tab title="Ethereum transaction (EVM)" %}
-<pre class="language-typescript" data-line-numbers><code class="lang-typescript"><strong>const data = {
+<pre class="language-typescript" data-line-numbers><code class="lang-typescript">import { clients, evmSepolia } from '@snapshot-labs/sx';
+import type { Web3Provider } from '@ethersproject/providers';
+
+const clientConfig = { networkConfig: evmSepolia }
+const client = new clients.EthereumTx(clientConfig);
+
+const web3 = new Web3Provider(window.ethereum);
+
+<strong>const data = {
 </strong>  space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
   authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
   strategies: [
@@ -68,12 +108,21 @@ const receipt = await client.vote({
     data
   }
 });
+
 console.log('Receipt', receipt);
 </code></pre>
 {% endtab %}
 
 {% tab title="Ethereum signature (EVM)" %}
 ```typescript
+import { clients, evmSepolia } from '@snapshot-labs/sx';
+import type { Web3Provider } from '@ethersproject/providers';
+
+const clientConfig = { networkConfig: evmSepolia }
+const ethSigClient = new clients.EthereumSig(clientConfig);
+
+const web3 = new Web3Provider(window.ethereum);
+
 const data = {
   space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
   authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
@@ -88,14 +137,9 @@ const data = {
   metadataUri: ''
 };
 
-const envelope = await ethSigClient.vote({
+const receipt = await ethSigClient.vote({
   signer: web3.getSigner(),
   data
-});
-
-const receipt = await client.vote({
-  signer: web3.getSigner(),
-  envelope
 });
 
 console.log('Receipt', receipt);
@@ -108,6 +152,14 @@ console.log('Receipt', receipt);
 {% tabs %}
 {% tab title="Ethereum transaction (EVM)" %}
 ```typescript
+import { clients, evmSepolia } from '@snapshot-labs/sx';
+import type { Web3Provider } from '@ethersproject/providers';
+
+const clientConfig = { networkConfig: evmSepolia }
+const client = new clients.EthereumTx(clientConfig);
+
+const web3 = new Web3Provider(window.ethereum);
+
 const data = {
   space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
   authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
@@ -130,12 +182,21 @@ const receipt = await client.propose({
     data
   }
 });
+
 console.log('Receipt', receipt);
 ```
 {% endtab %}
 
 {% tab title="Ethereum signature (EVM)" %}
 ```typescript
+import { clients, evmSepolia } from '@snapshot-labs/sx';
+import type { Web3Provider } from '@ethersproject/providers';
+
+const clientConfig = { networkConfig: evmSepolia }
+const client = new clients.EthereumSig(clientConfig);
+
+const web3 = new Web3Provider(window.ethereum);
+
 const data = {
   space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
   authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
@@ -152,14 +213,9 @@ const data = {
   metadataUri: ''
 };
 
-const envelope = await ethSigClient.propose({
+const receipt = await ethSigClient.propose({
   signer: web3.getSigner(),
     data
-});
-
-const receipt = await client.propose({
-  signer: web3.getSigner(),
-  envelope
 });
 
 console.log('Receipt', receipt);
@@ -172,6 +228,14 @@ console.log('Receipt', receipt);
 {% tabs %}
 {% tab title="Ethereum transaction (EVM)" %}
 ```typescript
+import { clients, evmSepolia } from '@snapshot-labs/sx';
+import type { Web3Provider } from '@ethersproject/providers';
+
+const clientConfig = { networkConfig: evmSepolia }
+const client = new clients.EthereumTx(clientConfig);
+
+const web3 = new Web3Provider(window.ethereum);
+
 const data = {
   space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
   proposal: 1, // proposalId
@@ -189,12 +253,21 @@ const receipt = await client.updateProposal({
     data
   }
 });
+
 console.log('Receipt', receipt);
 ```
 {% endtab %}
 
 {% tab title="Ethereum signature (EVM)" %}
 ```typescript
+import { clients, evmSepolia } from '@snapshot-labs/sx';
+import type { Web3Provider } from '@ethersproject/providers';
+
+const clientConfig = { networkConfig: evmSepolia }
+const client = new clients.EthereumSig(clientConfig);
+
+const web3 = new Web3Provider(window.ethereum);
+
 const data = {
   space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
   proposal: 1, // proposalId
@@ -206,16 +279,11 @@ const data = {
   metadataUri: ''
 };
 
-const envelope = await ethSigClient.updateProposal({
+const receipt = await ethSigClient.updateProposal({
   signer: web3.getSigner(),
   envelope: {
     data
   }
-});
-
-const receipt = await client.updateProposal({
-  signer: web3.getSigner(),
-  envelope
 });
 
 console.log('Receipt', receipt);
