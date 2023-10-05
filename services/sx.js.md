@@ -20,7 +20,9 @@ yarn add @snapshot-labs/sx@beta
 {% endtab %}
 
 {% tab title="npm" %}
-`npm install @snapshot-labs/sx@beta`
+```bash
+npm install @snapshot-labs/sx@beta
+```
 {% endtab %}
 {% endtabs %}
 
@@ -45,16 +47,12 @@ const ethSigClient = new clients.EthereumSig(clientConfig);
 {% tab title="StarkNet Clients" %}
 ```typescript
 import { clients } from '@snapshot-labs/sx';
-import type { Provider } from 'starknet';
+import { Provider, constants } from 'starknet';
 
 const ethUrl = 'https://rpcs.snapshotx.xyz/1';
 const manaUrl = 'https://mana.pizza';
 
-const starkProvider = new Provider({
-    sequencer: {
-      baseUrl: 'http://127.0.0.1:5050/'
-    }
-  });
+const starkProvider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
 
 const clientConfig = {
   starkProvider,
@@ -141,6 +139,93 @@ const receipt = await ethSigClient.vote({
   signer: web3.getSigner(),
   data
 });
+
+console.log('Receipt', receipt);
+```
+{% endtab %}
+
+{% tab title="StarkNet transaction" %}
+```typescript
+import { clients } from '@snapshot-labs/sx';
+import { Provider, constants } from 'starknet';
+
+const web3 = window.starknet.provider;
+
+const ethUrl = 'https://rpcs.snapshotx.xyz/1';
+const manaUrl = 'https://mana.pizza';
+
+const starkProvider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+
+const clientConfig = {
+  starkProvider,
+  manaUrl,
+  ethUrl
+};
+
+const client = new clients.StarkNetTx(clientConfig);
+
+const data = {
+  space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
+  authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
+  strategies: [
+    {
+      address: '0xc1245c5dca7885c73e32294140f1e5d30688c202',
+      index: 0
+    }
+  ],
+  proposal: 7,
+  choice: 1,
+  metadataUri: ''
+};
+
+const receipt = await client.vote(web3.provider.account, {
+    data
+});
+
+console.log('Receipt', receipt);
+```
+{% endtab %}
+
+{% tab title="StarkNet signature" %}
+```typescript
+import { clients } from '@snapshot-labs/sx';
+import { Provider, constants } from 'starknet';
+
+const web3 = window.starknet.provider;
+
+const ethUrl = 'https://rpcs.snapshotx.xyz/1';
+const manaUrl = 'https://mana.pizza';
+
+const starkProvider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+
+const clientConfig = {
+  starkProvider,
+  manaUrl,
+  ethUrl
+};
+
+const client = new clients.StarkNetSig(clientConfig);
+
+const data = {
+  space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
+  authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
+  strategies: [
+    {
+      address: '0xc1245c5dca7885c73e32294140f1e5d30688c202',
+      index: 0
+    }
+  ],
+  proposal: 7,
+  choice: 1,
+  metadataUri: ''
+};
+
+const envelope = await client.vote({
+    signer: web3.provider.account,
+    data
+});
+
+const receipt = await client.send(envelope);
 
 console.log('Receipt', receipt);
 ```
