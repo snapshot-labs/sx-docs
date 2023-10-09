@@ -306,6 +306,97 @@ const receipt = await ethSigClient.propose({
 console.log('Receipt', receipt);
 ```
 {% endtab %}
+
+{% tab title="StarkNet transaction" %}
+```typescript
+import { clients } from '@snapshot-labs/sx';
+import { Provider, constants } from 'starknet';
+
+const web3 = window.starknet.provider;
+
+const ethUrl = 'https://rpcs.snapshotx.xyz/1';
+const manaUrl = 'https://mana.pizza';
+
+const starkProvider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+
+const clientConfig = {
+  starkProvider,
+  manaUrl,
+  ethUrl
+};
+
+const client = new clients.StarkNetTx(clientConfig);
+
+const data = {
+  space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
+  authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
+  strategies: [
+    {
+      address: '0xc1245c5dca7885c73e32294140f1e5d30688c202',
+      index: 0
+    }
+  ],
+  executionStrategy: {
+    addr: '0x0000000000000000000000000000000000000000',
+    params: '0x'
+  },
+  metadataUri: ''
+};
+
+const receipt = await client.propose(web3.provider.account, {
+    data
+});
+
+console.log('Receipt', receipt);
+```
+{% endtab %}
+
+{% tab title="StarkNet signature" %}
+```typescript
+import { clients } from '@snapshot-labs/sx';
+import { Provider, constants } from 'starknet';
+
+const web3 = window.starknet.provider;
+
+const ethUrl = 'https://rpcs.snapshotx.xyz/1';
+const manaUrl = 'https://mana.pizza';
+
+const starkProvider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+
+const clientConfig = {
+  starkProvider,
+  manaUrl,
+  ethUrl
+};
+
+const client = new clients.StarkNetSig(clientConfig);
+
+const data = {
+  space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
+  authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
+  strategies: [
+    {
+      address: '0xc1245c5dca7885c73e32294140f1e5d30688c202',
+      index: 0
+    }
+  ],
+  executionStrategy: {
+    addr: '0x0000000000000000000000000000000000000000',
+    params: '0x'
+  },
+  metadataUri: ''
+};
+
+const envelope = await client.propose({
+    signer: web3.provider.account,
+    data
+});
+
+const receipt = await client.send(envelope);
+
+console.log('Receipt', receipt);
+```
+{% endtab %}
 {% endtabs %}
 
 ### Update a proposal
@@ -370,6 +461,87 @@ const receipt = await ethSigClient.updateProposal({
     data
   }
 });
+
+console.log('Receipt', receipt);
+```
+{% endtab %}
+
+{% tab title="StarkNet transaction" %}
+```typescript
+import { clients } from '@snapshot-labs/sx';
+import { Provider, constants } from 'starknet';
+
+const web3 = window.starknet.provider;
+
+const ethUrl = 'https://rpcs.snapshotx.xyz/1';
+const manaUrl = 'https://mana.pizza';
+
+const starkProvider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+
+const clientConfig = {
+  starkProvider,
+  manaUrl,
+  ethUrl
+};
+
+const client = new clients.StarkNetTx(clientConfig);
+
+const data = {
+  space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
+  proposal: 1, // proposalId
+  authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
+  executionStrategy: {
+    addr: '0x0000000000000000000000000000000000000000',
+    params: '0x'
+  },
+  metadataUri: ''
+};
+
+const receipt = await client.updateProposal(web3.provider.account, {
+    data
+});
+
+console.log('Receipt', receipt);
+```
+{% endtab %}
+
+{% tab title="StarkNet signature" %}
+```typescript
+import { clients } from '@snapshot-labs/sx';
+import { Provider, constants } from 'starknet';
+
+const web3 = window.starknet.provider;
+
+const ethUrl = 'https://rpcs.snapshotx.xyz/1';
+const manaUrl = 'https://mana.pizza';
+
+const starkProvider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
+
+const clientConfig = {
+  starkProvider,
+  manaUrl,
+  ethUrl
+};
+
+const client = new clients.StarkNetSig(clientConfig);
+
+const data = {
+  space: '0x012b261effbf548f2b9a495d50b81a8a7c1dd941',
+  proposal: 1, // proposalId
+  authenticator: '0xba06e6ccb877c332181a6867c05c8b746a21aed1',
+  executionStrategy: {
+    addr: '0x0000000000000000000000000000000000000000',
+    params: '0x'
+  },
+  metadataUri: ''
+};
+
+const envelope = await client.updateProposal({
+    signer: web3.provider.account,
+    data
+});
+
+const receipt = await client.send(envelope);
 
 console.log('Receipt', receipt);
 ```
