@@ -13,15 +13,21 @@ SX.js is the official Typescript SDK to interact with Snapshot X. The SDK includ
 Install the latest version of the beta release:
 
 {% tabs %}
-{% tab title="yarn" %}
+{% tab title="NPM" %}
+```bash
+npm install @snapshot-labs/sx@beta
+```
+{% endtab %}
+
+{% tab title="Yarn" %}
 ```bash
 yarn add @snapshot-labs/sx@beta
 ```
 {% endtab %}
 
-{% tab title="npm" %}
+{% tab title="Bun" %}
 ```bash
-npm install @snapshot-labs/sx@beta
+bun add @snapshot-labs/sx@beta
 ```
 {% endtab %}
 {% endtabs %}
@@ -33,7 +39,7 @@ npm install @snapshot-labs/sx@beta
 Everything happens thanks to the `clients` objects. Depending on the specific Space or Proposal setup, you may need to use a Transaction or Signature Client. This quick guide demonstrates how to easily set all of them up, both for Ethereum and StarkNet:
 
 {% tabs %}
-{% tab title="EVM Clients" %}
+{% tab title="EVM clients" %}
 ```typescript
 import { clients, evmSepolia } from '@snapshot-labs/sx';
 
@@ -44,7 +50,7 @@ const ethSigClient = new clients.EthereumSig(clientConfig);
 ```
 {% endtab %}
 
-{% tab title="StarkNet Clients" %}
+{% tab title="Starknet clients" %}
 ```typescript
 import { clients } from '@snapshot-labs/sx';
 import { Provider, constants } from 'starknet';
@@ -144,7 +150,7 @@ console.log('Receipt', receipt);
 ```
 {% endtab %}
 
-{% tab title="StarkNet transaction" %}
+{% tab title="Starknet transaction" %}
 ```typescript
 import { clients } from '@snapshot-labs/sx';
 import { Provider, constants } from 'starknet';
@@ -186,7 +192,7 @@ console.log('Receipt', receipt);
 ```
 {% endtab %}
 
-{% tab title="StarkNet signature" %}
+{% tab title="Starknet signature" %}
 ```typescript
 import { clients } from '@snapshot-labs/sx';
 import { Provider, constants } from 'starknet';
@@ -307,7 +313,7 @@ console.log('Receipt', receipt);
 ```
 {% endtab %}
 
-{% tab title="StarkNet transaction" %}
+{% tab title="Starknet transaction" %}
 ```typescript
 import { clients } from '@snapshot-labs/sx';
 import { Provider, constants } from 'starknet';
@@ -351,7 +357,7 @@ console.log('Receipt', receipt);
 ```
 {% endtab %}
 
-{% tab title="StarkNet signature" %}
+{% tab title="Starknet signature" %}
 ```typescript
 import { clients } from '@snapshot-labs/sx';
 import { Provider, constants } from 'starknet';
@@ -466,7 +472,7 @@ console.log('Receipt', receipt);
 ```
 {% endtab %}
 
-{% tab title="StarkNet transaction" %}
+{% tab title="Starknet transaction" %}
 ```typescript
 import { clients } from '@snapshot-labs/sx';
 import { Provider, constants } from 'starknet';
@@ -505,7 +511,7 @@ console.log('Receipt', receipt);
 ```
 {% endtab %}
 
-{% tab title="StarkNet signature" %}
+{% tab title="Starknet signature" %}
 ```typescript
 import { clients } from '@snapshot-labs/sx';
 import { Provider, constants } from 'starknet';
@@ -547,8 +553,6 @@ console.log('Receipt', receipt);
 ```
 {% endtab %}
 {% endtabs %}
-
-
 
 {% hint style="info" %}
 More details coming soon.
