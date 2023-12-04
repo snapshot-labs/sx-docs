@@ -32,6 +32,6 @@
 
 ## Community
 
-* [Discord](http://discord.gg/snapshot)
+* [Discord](https://discord.snapshot.org)
 * [Twitter](https://twitter.com/SnapshotLabs)
 * [GitHub](https://github.com/snapshot-labs)
