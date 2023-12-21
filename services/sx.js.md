@@ -554,6 +554,57 @@ console.log('Receipt', receipt);
 {% endtab %}
 {% endtabs %}
 
+### Get voting power
+
+Address' voting power depends on the strategy used. Below you can see an example of getting voting power for whitelist Voting strategy on Starknet.
+
+{% tabs %}
+{% tab title="Starknet Whitelist" %}
+```typescript
+import {
+  starknetGoerli1,
+  getStarknetStrategy,
+} from '@snapshot-labs/sx';
+
+const clientConfig = {
+  starkProvider,
+  ethUrl,
+  networkConfig: starknetGoerli1
+};
+
+const address = '0xe3ca14dcb7862116bbbe4331a9927c6693b141aa8936bb76e2bdfa4b551a52';
+const voterAddress = '0x556B14CbdA79A36dC33FcD461a04A5BCb5dC2A70';
+const strategyMetadata = {
+    "tree": [
+        {
+            "type": 1,
+            "address": "0x556B14CbdA79A36dC33FcD461a04A5BCb5dC2A70",
+            "votingPower": "10"
+        }
+    ]
+}
+const timestamp = 1703090187
+const strategyParams = [
+    "0xe3ca14dcb7862116bbbe4331a9927c6693b141aa8936bb76e2bdfa4b551a52"
+]
+
+const strategy = getStarknetStrategy(address, clientConfig.networkConfig);
+
+const vp = await strategy.getVotingPower(
+  address,
+  voterAddress,
+  strategyMetadata,
+  timestamp,
+  strategyParams,
+  clientConfig
+);
+```
+{% endtab %}
+{% endtabs %}
+
 {% hint style="info" %}
 More details coming soon.
 {% endhint %}
+
+
+
