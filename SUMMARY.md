@@ -10,7 +10,7 @@
 * [Authenticators](protocol/authenticators.md)
 * [Proposal validation strategies](protocol/proposal-validation-strategies.md)
 * [Voting strategies](protocol/voting-strategies.md)
-* [Starknet Specifics](protocol/starknet-specifics.md)
+* [Starknet specifics](protocol/starknet-specifics.md)
 * [Execution strategies](protocol/execution-strategies.md)
 * [Audits](protocol/audits.md)
 
