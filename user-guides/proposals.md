@@ -85,8 +85,8 @@ Once the proposal has reached a quorum and passed, anyone can execute the transa
 
 <figure><img src="../.gitbook/assets/Screenshot 2023-03-20 at 11.20.56.png" alt=""><figcaption></figcaption></figure>
 
-[^1]: Authenticators define how users can authenticate themselves to take specific actions. You can learn more about them [authenticators.md](../protocol-sx-evm/authenticators.md "mention").
+[^1]: Authenticators define how users can authenticate themselves to take specific actions. You can learn more about them [authenticators.md](../protocol/authenticators.md "mention").
 
-[^2]: Proposal Validation Strategy defines the minimum Voting Power required to create a new proposal. Learn more here: [proposal-validation-strategies.md](../protocol-sx-evm/proposal-validation-strategies.md "mention")
+[^2]: Proposal Validation Strategy defines the minimum Voting Power required to create a new proposal. Learn more here: [proposal-validation-strategies.md](../protocol/proposal-validation-strategies.md "mention")
 
-[^3]: Execution Strategies determine the status of the proposal and are responsible for execution of the proposal payload once it has passed. If you want to learn more, head to [execution-strategies.md](../protocol-sx-evm/execution-strategies.md "mention")
+[^3]: Execution Strategies determine the status of the proposal and are responsible for execution of the proposal payload once it has passed. If you want to learn more, head to [execution-strategies.md](../protocol/execution-strategies.md "mention")

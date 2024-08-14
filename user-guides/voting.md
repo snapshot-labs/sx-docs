@@ -10,7 +10,7 @@ There are several aspects that define if you are eligible to vote on a specific 
 
 ### Voting strategies <a href="#voting-strategies" id="voting-strategies"></a>
 
-Each space specifies their [Voting Strategies](../protocol-sx-evm/voting-strategies.md) in its settings. You can see the custom setup by opening the space settings. This setup can define if you are eligible to take part in the voting and what is your Voting Power calculated at the timestamp of proposal creation.
+Each space specifies their [Voting Strategies](../protocol/voting-strategies.md) in its settings. You can see the custom setup by opening the space settings. This setup can define if you are eligible to take part in the voting and what is your Voting Power calculated at the timestamp of proposal creation.
 
 One of the most common questions we receive on our support channels is **Why can't I vote?**
 

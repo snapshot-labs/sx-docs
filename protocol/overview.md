@@ -13,7 +13,7 @@ This approach allows a far higher degree of modularity and customisability than 
 
 Creating a space on Snapshot X is **like creating a new character in a game**. First you need to select an armour to protect your character, then you need to decide on a weapon (spear, sword, bow). Finally, you need to choose a mount for your character to get him to travel from town to town faster.
 
-With that analogy in mind, think about the **Space** contract like the character, and the [**Authenticators**](authenticators.md), [**Proposal Validation Strategies**](proposal-validation-strategies.md), [**Voting Strategies**](broken-reference)**,** and [**Execution Strategies**](execution-strategies.md) like the different add-ons you need to decide on. We refer to them collectively as **Snapshot X Modules**.&#x20;
+With that analogy in mind, think about the **Space** contract like the character, and the [**Authenticators**](authenticators.md), [**Proposal Validation Strategies**](proposal-validation-strategies.md), [**Voting Strategies**](voting-strategies.md)**,** and [**Execution Strategies**](execution-strategies.md) like the different add-ons you need to decide on. We refer to them collectively as **Snapshot X Modules**.&#x20;
 
 Let's go over those briefly:
 
@@ -44,7 +44,7 @@ The full usage flow looks like this:
 
 1. A DAO deploys a **Space** contract and defines space settings along with a set of authenticators, voting strategies, and a proposal validation strategy.&#x20;
 2. A user can create a **proposal** in the **Space** via a whitelisted authenticator. The proposal validation strategy is queried to check that the user is eligible to create the proposal. \
-   To create a proposal user has to specify an execution strategy contract along with an execution payload that will contain the encoded set of transactions inside the proposal.&#x20;
+   To create a proposal, the proposer has to specify an execution strategy contract along with an execution payload that will contain the encoded set of transactions inside the proposal.&#x20;
 3. Users can vote on the proposal by authenticating through one of the whitelisted authenticator contracts.
 4. Once the voting period has ended, anyone can execute the proposal permissionlessly. This will forward the execution payload to the execution strategy and execute the transactions included.
 

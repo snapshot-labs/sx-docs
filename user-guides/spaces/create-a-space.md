@@ -31,7 +31,7 @@ Choose the network for your organisation. At the moment Snapshot X works with Et
 Voting Strategies calculate the **Voting Power** of each user.
 
 {% hint style="info" %}
-If you are not familiar with what a Voting Strategy is head to [voting-strategies.md](../../protocol-sx-evm/voting-strategies.md "mention") to learn more.
+If you are not familiar with what a Voting Strategy is head to [voting-strategies.md](../../protocol/voting-strategies.md "mention") to learn more.
 {% endhint %}
 
 Select a Voting Strategy from the list of available options and provide the required details.
@@ -45,16 +45,16 @@ For example for the **Delegated Compound Token** you have to provide the token c
 Choose how users will be authenticated in order to create a proposal or cast a vote.&#x20;
 
 {% hint style="info" %}
-If you are not familiar with what Authenticators are head to [authenticators.md](../../protocol-sx-evm/authenticators.md "mention")to learn more.
+If you are not familiar with what Authenticators are head to [authenticators.md](../../protocol/authenticators.md "mention")to learn more.
 {% endhint %}
 
 The two authenticators provided by Snapshot X are:
 
-#### [Ethereum signature](../../protocol-sx-evm/authenticators.md#ethereum-signature-authenticator)
+#### [Ethereum signature](../../protocol/authenticators.md#ethereum-signature-authenticator)
 
 It will authenticate a user based on a message signed by an Ethereum private key.&#x20;
 
-#### [Ethereum transaction](../../protocol-sx-evm/authenticators.md#ethereum-transaction-authenticator)
+#### [Ethereum transaction](../../protocol/authenticators.md#ethereum-transaction-authenticator)
 
 Users have to submit a transaction on Ethereum. Authentication is proving that the sender's address is valid.
 
@@ -63,7 +63,7 @@ Users have to submit a transaction on Ethereum. Authentication is proving that t
 Proposal Validation is setting **requirements** that user needs to meet in order to **create a new proposal.**
 
 {% hint style="info" %}
-If you are not familiar with what a Proposal Validation is head to [proposal-validation-strategies.md](../../protocol-sx-evm/proposal-validation-strategies.md "mention") to learn more.
+If you are not familiar with what a Proposal Validation is head to [proposal-validation-strategies.md](../../protocol/proposal-validation-strategies.md "mention") to learn more.
 {% endhint %}
 
 Define the minimum Voting Power required to create a new proposal.
@@ -84,7 +84,7 @@ Execution Strategies have two key roles:
 2. and **executing the payload** of a proposal if it has been accepted.&#x20;
 
 {% hint style="info" %}
-If you are not familiar with what Execution Strategies are head to [execution-strategies.md](../../protocol-sx-evm/execution-strategies.md "mention") to learn more.
+If you are not familiar with what Execution Strategies are head to [execution-strategies.md](../../protocol/execution-strategies.md "mention") to learn more.
 {% endhint %}
 
 When selecting the execution strategy you have to provide a **quorum** - minimum number of votes required for a proposal to pass.

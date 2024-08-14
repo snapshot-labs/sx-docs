@@ -2,16 +2,17 @@
 
 * [Snapshot X](README.md)
 
-## Protocol: SX-EVM
+## Protocol
 
-* [Overview](protocol-sx-evm/overview.md)
-* [Space actions](protocol-sx-evm/space.md)
-* [Space controller actions](protocol-sx-evm/space-controller-actions.md)
-* [Authenticators](protocol-sx-evm/authenticators.md)
-* [Proposal validation strategies](protocol-sx-evm/proposal-validation-strategies.md)
-* [Voting strategies](protocol-sx-evm/voting-strategies.md)
-* [Execution strategies](protocol-sx-evm/execution-strategies.md)
-* [Audits](protocol-sx-evm/audits.md)
+* [Overview](protocol/overview.md)
+* [Space actions](protocol/space.md)
+* [Space controller actions](protocol/space-controller-actions.md)
+* [Authenticators](protocol/authenticators.md)
+* [Proposal validation strategies](protocol/proposal-validation-strategies.md)
+* [Voting strategies](protocol/voting-strategies.md)
+* [Starknet Specifics](protocol/starknet-specifics.md)
+* [Execution strategies](protocol/execution-strategies.md)
+* [Audits](protocol/audits.md)
 
 ## User guides
 

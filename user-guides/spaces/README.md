@@ -5,7 +5,7 @@ description: Learn how to create or manage a space for you organization.
 # Spaces
 
 {% hint style="info" %}
-If you are not familiar with the concept of a Space, head to [overview.md](../../protocol-sx-evm/overview.md "mention") to learn more.
+If you are not familiar with the concept of a Space, head to [overview.md](../../protocol/overview.md "mention") to learn more.
 {% endhint %}
 
 {% content-ref url="create-a-space.md" %}
