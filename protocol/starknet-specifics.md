@@ -17,7 +17,7 @@ This diagram represents the flow of a proposal that will get executed on L1, wit
 
 ### Storage proofs
 
-In a nutshell, storage proofs are mathematical proofs that a user had this token or that NFT in their wallet at a specific moment in time. We use them to compute the voting power of any user at the moment the proposal created, without the user having to stake or bridge their tokens. This revolutionary technology (shout out to [Herodotus](https://herodotus.dev/)) allows for a trustless balance oracle that we can use to compute the voting power of users. The exact code for verifying a storage value can be found [here](https://github.com/snapshot-labs/sx-starknet/blob/develop/starknet/src/utils/single\_slot\_proof.cairo).
+In a nutshell, storage proofs are cryptographic proofs that a user had this token or that NFT in their wallet at a specific moment in time. We use them to compute the voting power of any user at the moment the proposal started, without the user having to bridge their tokens. This technology developed in collaboration with [Herodotus](https://herodotus.dev/), allows for a trustless balance verification that we can use to compute the voting power of users. The exact code for verifying a storage value can be found [here](https://github.com/snapshot-labs/sx-starknet/blob/develop/starknet/src/utils/single\_slot\_proof.cairo).
 
 1. A user creates a proposal. The space registers it and [stores the start timestamp](https://github.com/snapshot-labs/sx-starknet/blob/03041771ba701a6ce0d5a95b4ead290add115348/starknet/src/space/space.cairo#L259).
 2. When the proposal starts, the space caches the block number on L1 that corresponds to the stored `start timestamp`. To do that, we use [Herodotus' timestamp remapper contract](https://docs.herodotus.dev/herodotus-docs/protocol-design/timestamp-to-block-number-mapper).
@@ -28,7 +28,7 @@ For OpenZeppelin ERC20Votes tokens, the function `get_past_votes` is reproduced 
 
 ### Transaction relayer
 
-In order to avoid the overhead of installing and managing a Starknet account, we ask users to sign their vote with their Ethereum wallet, and then simply relay the transaction ourselves on the Starknet network (using our [transaction relayer, mana](broken-reference)). Once the transaction is relayed, and by leveraging the modularity of our authenticators system, a [special authenticator](https://github.com/snapshot-labs/sx-starknet/blob/develop/starknet/src/authenticators/eth\_sig.cairo) verifies the provided signature and lets the vote be counted in!
+In order to avoid the overhead of installing and managing a Starknet account, we ask users to sign their vote with their Ethereum wallet, and then simply relay the transaction on the Starknet network using our transaction relayer [Mana](../services/mana.md). Once the transaction is relayed, and by leveraging the modularity of our authenticators system, a [special authenticator](https://github.com/snapshot-labs/sx-starknet/blob/develop/starknet/src/authenticators/eth\_sig.cairo) verifies the provided signature and lets the vote be counted in!
 
 But who pays for the relaying fees? It is expected that DAOs who want to provide their users with this ease of vote would be the paying those fees, which should be minimal anyway!
 
