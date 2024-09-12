@@ -34,9 +34,9 @@ function initialize(
 * `proposalValidationStrategyMetadataURI`: A metadata URI corresponding to the `proposalValidationStrategy`.
 * `daoURI`: A metadata URI as defined in ERC-4824.
 * `metadataURI`: The metadata URI for the space (its name, description, social tags and treasury address).
-* `votingStrategies`: An array of voting strategies selected for the space. The voting power of each user will be calculated as the sum of voting powers returned for each strategy in the list for that user. More information in the [Voting Strategy](https://docs.snapshotx.xyz/protocol/voting-strategies) section.
+* `votingStrategies`: An array of voting strategies selected for the space. The voting power of each user will be calculated as the sum of voting powers returned for each strategy in the list for that user. More information in the [Voting Strategy](https://docs.snapshot.box/protocol/voting-strategies) section.
 * `votingStrategyMetadataURIs`: An array of metadata URIs corresponding to the `votingStrategies` array.
-* `authenticators`: An array of whitelisted authenticators. These are the ways in which a user can authenticate themselves in order to vote or propose. More information in the [Authenticators](https://docs.snapshotx.xyz/protocol/authenticators) section.
+* `authenticators`: An array of whitelisted authenticators. These are the ways in which a user can authenticate themselves in order to vote or propose. More information in the [Authenticators](https://docs.snapshot.box/protocol/authenticators) section.
 
 Each DAO on Snapshot X will have at least one space, however a DAO might choose to have multiple spaces if they want to create different rules for individual proposals. As an example one space can use an Ethereum signature as an authentication, another an Ethereum transaction.
 
@@ -125,7 +125,7 @@ We provide the following view function to access the proposal status at any time
 function getProposalStatus(uint256 proposalId) external view returns (ProposalStatus proposalStatus);
 ```
 
-The status of a proposal is actually defined by the chosen Execution strategy rather than the space itself, therefore this query actually makes an internal call to the Execution strategy of the proposal. Refer to the [execution strategies](https://docs.snapshotx.xyz/protocol/execution-strategies) section for more information.
+The status of a proposal is actually defined by the chosen Execution strategy rather than the space itself, therefore this query actually makes an internal call to the Execution strategy of the proposal. Refer to the [execution strategies](https://docs.snapshot.box/protocol/execution-strategies) section for more information.
 
 * `proposalId`: The ID of the proposal to query.
 * `voter`: The address of the voter to query.
