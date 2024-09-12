@@ -199,7 +199,7 @@ import { Provider, constants } from 'starknet';
 
 const web3 = window.starknet.provider;
 
-const ethUrl = 'https://rpcs.snapshot.box/1';
+const ethUrl = 'https://rpc.snapshot.box/1';
 const manaUrl = 'https://mana.pizza';
 
 const starkProvider = new Provider({ sequencer: { network: constants.NetworkName.SN_GOERLI } });
