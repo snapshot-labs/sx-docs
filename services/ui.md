@@ -8,4 +8,4 @@ The UI is the official interface for Snapshot X.&#x20;
 
 #### UI
 
-[https://snapshotx.xyz](https://snapshotx.xyz/)
+[https://snapshot.box](https://snapshot.box/)
