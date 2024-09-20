@@ -23,6 +23,6 @@ description: >-
 Snapshot can be found on EVM-chains and on Starknet. Both the [EVM implementation](https://github.com/snapshot-labs/sx-evm)  and the [Cairo implementation](https://github.com/snapshot-labs/sx-starknet) are open source. The Starknet-specific details can be found on [this dedicated page](protocol/starknet-specifics.md).
 {% endhint %}
 
-If anything in these docs is unclear or you would like more detail, do not hesitate to reach out on [Discord](https://discord.gg/snapshot).
+If anything in these docs is unclear or you would like more detail, do not hesitate to reach out on [Discord](https://discord.snapshot.org).
 
 \[1] We note that there are in fact offchain services (eg the relayer Mana) built for use with Snapshot X, but these are not mandatory and therefore cannot lead to censorship.
