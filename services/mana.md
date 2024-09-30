@@ -8,7 +8,7 @@ Note that currently Mana only supports proposal creation, proposal updates, and 
 
 #### GitHub
 
-[https://github.com/snapshot-labs/mana](https://github.com/snapshot-labs/mana)
+[https://github.com/snapshot-labs/sx-monorepo/tree/master/apps/mana](https://github.com/snapshot-labs/sx-monorepo/tree/master/apps/mana)
 
 #### Public API
 

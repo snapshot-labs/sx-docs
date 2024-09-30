@@ -4,7 +4,7 @@ SX.js is the official Typescript SDK to interact with Snapshot X. The SDK includ
 
 #### GitHub
 
-{% embed url="https://github.com/snapshot-labs/sx.js" %}
+[https://github.com/snapshot-labs/sx-monorepo/tree/master/packages/sx.js](https://github.com/snapshot-labs/sx-monorepo/tree/master/packages/sx.js)
 
 ## Quick start
 
@@ -605,6 +605,3 @@ const vp = await strategy.getVotingPower(
 {% hint style="info" %}
 More details coming soon.
 {% endhint %}
-
-
-
